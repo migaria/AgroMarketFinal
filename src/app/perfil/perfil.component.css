@@ -1,0 +1,91 @@
+.perfil-container {
+  background-color: #b8db97;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfil-header {
+  background-color: #09730a;
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+  border-radius: 10px 10px 0 0;
+}
+
+.perfil-header h1 {
+  color: #a2d34e;
+  font-size: 2.8rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.perfil-main {
+  padding: 40px 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.perfil-main h2 {
+  color: #1d4728;
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.perfil-opcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  background: none;
+}
+
+.perfil-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icono {
+  width: 40px;
+  height: 40px;
+}
+
+.btn-perfil {
+  background-color: transparent;
+  border: 2px solid #1d4728;
+  border-radius: 10px;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1d4728;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-perfil:hover {
+  background-color: #1d4728;
+  color: #fff;
+}
+
+.img-perfil {
+  width: 45%;
+  height: auto;
+  border-radius: 15px;
+}
+
+/* 📱 Responsive para móviles */
+@media (max-width: 768px) {
+  .perfil-opcion {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .img-perfil {
+    width: 90%;
+  }
+}
