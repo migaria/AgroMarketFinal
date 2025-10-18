@@ -1,104 +1,98 @@
-
+/* Fondo general */
 .comprador-container {
-  font-family: "Poppins", sans-serif;
-  background-color: #b7d89e;
+  background-color: #b9e18a;
   min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Encabezado */
-.header {
+.encabezado {
+  background-color: #2a8a2a;
   width: 100%;
-  background-color: #228b22;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  color: #b7f295;
-  padding: 10px 0px;
-  border-radius: 0 0 25px 25px;
+  justify-content: center; 
+  padding: 25px 0;
+  color: white;
+  border-radius: 0 0 20px 20px;
 }
 
-.header h1 {
-  flex: 1;
+.encabezado h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
   text-align: center;
-  font-size: 3rem;
-  font-weight: 800;
-  color: #7ad35a;
 }
 
 
-/* Contenedor de productos */
+/* Contenedor principal */
 .productos {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: flex-start;
   flex-wrap: wrap;
-  width: 100%;
-  margin-top: 30px;
+  gap: 80px;
+  margin-top: 50px;
 }
 
-/* Tarjeta de producto */
+/* Cada producto */
 .producto {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 25%;
+  width: 330px;
   background-color: transparent;
-  border-radius: 9px;
-  margin-bottom: 10px;
 }
 
-.producto img {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+/* Imagen del producto */
+.imagen-producto {
+  width: 330px;
+  height: 210px;
+  border-radius: 5px;
   object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Caja de descripción */
-.descripcion {
-  background-color: #97cf5d;
-  border-radius: 10px;
-  padding: 11px;
-  text-align: center;
-  width: 100%;
+/* Caja verde del texto */
+.info {
+  background-color: #9fd46b;
+  border-radius: 20px;
+  padding: 15px 20px;
   margin-top: 10px;
+  text-align: center;
+  color: #111;
+  width: 330px;
 }
 
-.descripcion h3 {
-  font-weight: 700;
+.info h2 {
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
   text-transform: uppercase;
-  margin-bottom: 10px;
 }
 
-.descripcion p {
+.info p {
+  margin: 0;
   font-size: 0.95rem;
-  color: #0b3317;
-  margin: 5px 0;
+  line-height: 1.3;
 }
 
-/* Botón de compra */
-.comprar {
-  background-color: #2f682b;
-  color: #c8f8b0;
+/* Botón */
+.btn {
+  background-color: #36691f;
+  color: white;
   border: none;
-  border-radius: 30px;
-  width: 90%;
-  padding: 10px;
-  font-size: 1rem;
-  margin-top: 32px;
+  border-radius: 25px;
+  padding: 10px 0;
+  width: 330px;
+  margin-top: 10px;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: 0.2s;
+  transition: background-color 0.3s ease;
 }
 
-.comprar:hover {
-  background-color: #21541f;
-  transform: scale(1.05);
-}
-
-/* Enlaces */
-.descripcion a {
-  color: #093d18;
-  text-decoration: underline;
+.btn:hover {
+  background-color: #1f4d10;
 }
