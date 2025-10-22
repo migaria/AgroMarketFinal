@@ -1,0 +1,105 @@
+
+.agregar-producto-container {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #b7d89e;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado */
+.header {
+  background-color: #228b22;
+  color: #d3f6b5;
+  text-align: center;
+  padding: 20px;
+  font-weight: bold;
+  font-size: 2rem;
+  border-radius: 0 0 20px 20px;
+}
+
+/* Contenido principal */
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex: 1;
+  padding: 60px;
+}
+
+/* Sección del formulario */
+.form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 1px;
+  color: #1a4d2e;
+}
+
+.subtitulo {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+input,    
+select {
+  width: 110%;
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid #2c5f2d;
+  outline: none;
+  font-size: 1rem;
+}
+
+.botones {
+  display: flex;
+  gap: 90px;
+  margin-top: 20px;
+}
+
+button {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #1a4d2e;
+  font-weight: 600;
+}
+
+button:hover {
+  text-decoration: underline;
+}
+
+.guardar {
+  color: #1a4d2e;
+}
+
+.cancelar {
+  color: #1a4d2e;
+}
+
+/* Sección de imagen */
+.imagen-section {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.imagen-section img {
+  width: 80%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
