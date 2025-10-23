@@ -1,105 +1,152 @@
+/* ESTRUCTURA GENERAL */
+:host {
+  display: block;
+  background-color: #b8dc95;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
 
 .agregar-producto-container {
-  font-family: "Segoe UI", sans-serif;
-  background-color: #b7d89e;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  width: 100%;
 }
 
-/* Encabezado */
+/* ENCABEZADO */
 .header {
-  background-color: #228b22;
-  color: #d3f6b5;
+  background-color: #09730a;
+  color: #b8dc95;
   text-align: center;
-  padding: 20px;
-  font-weight: bold;
-  font-size: 2rem;
-  border-radius: 0 0 20px 20px;
+  padding: 30px 0;
 }
 
-/* Contenido principal */
+.header h1 {
+  color: #a2d34e;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* CONTENIDO PRINCIPAL */
 .main-content {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  flex: 1;
-  padding: 60px;
+  flex-wrap: wrap;
 }
 
-/* Sección del formulario */
+/*FORMULARIO */
 .form-section {
   flex: 1;
+  background-color: #b8dc95;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  padding: 20px 1px;
-  color: #1a4d2e;
+  align-items: center;
+  padding: 10px;
 }
 
-.subtitulo {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  display: block;
+.form-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.form-container h2 {
+  color: #004d26;
+  font-size: 25px;
+  margin-bottom: 40px;
+  text-align: left;
 }
 
 .form-group {
+  margin-bottom: 25px;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+  color: #004d26;
   margin-bottom: 15px;
 }
 
-.form-group label {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-input,    
+input,
 select {
-  width: 110%;
-  padding: 6px;
-  border-radius: 10px;
-  border: 1px solid #2c5f2d;
+  width: 90%;
+  max-width: 450px; /* mismo ancho exacto */
+  box-sizing: border-box;
+  padding: 7px 10px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: 2px solid #0b5830;
   outline: none;
-  font-size: 1rem;
 }
 
+/* BOTONES*/
 .botones {
+  margin-top: 10px;
   display: flex;
-  gap: 90px;
-  margin-top: 20px;
+  gap: 20px;
 }
 
 button {
-  background: none;
+  background-color: #8abf70;
   border: none;
-  font-size: 1rem;
+  padding: 9px 70px;
+  border-radius: 40px;
+  font-size: 20px;
+  font-weight: bold;
   cursor: pointer;
-  color: #1a4d2e;
-  font-weight: 600;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  text-decoration: underline;
+  background-color: #7ab463;
 }
 
-.guardar {
-  color: #1a4d2e;
-}
-
-.cancelar {
-  color: #1a4d2e;
-}
-
-/* Sección de imagen */
+/*IMAGEN */
 .imagen-section {
+  flex: 1;
   display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: right;
 }
 
-.imagen-section img {
-  width: 80%;
+.imagen-container {
+  width: 100%;
   height: 100%;
-  border-radius: 20px;
-  object-fit: cover;
 }
+
+.imagen-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+
+@media (max-width: 900px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .imagen-section {
+    height: 300px;
+  }
+
+  .form-container h2 {
+    text-align: center;
+  }
+
+  .botones {
+    justify-content: center;
+  }
+}
+.form-section {
+  overflow: visible;
+  align-items: flex-start;
+  padding-bottom: 100px; /* espacio extra para el desplegable */
+}
+
+select {
+  position: relative;
+  z-index: 5;
+  background-color: #fff;
+}
+

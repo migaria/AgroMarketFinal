@@ -1,24 +1,15 @@
 <div class="agregar-producto-container">
   <header class="header">
-    <link rel="stylesheet" href="perfil-agricultor.component.css">
     <h1>AGROMARKET</h1>
   </header>
 
   <main class="main-content">
     <section class="form-section">
-      <h2>Agricultor</h2>
-
-      <div class="form-group">
-        <label class="subtitulo">Agregar Producto  ▼</label>
-      </div>
-
-      <form>
-        <div class="form-group">
-          <label for="nombre">Producto</label>
-        </div>
+      <div class="form-container">
+        <h2>Agricultor</h2>
 
         <div class="form-group">
-          <label for="nombre">Nombre</label>
+          <label for="nombre">Nombre producto</label>
           <input type="text" id="nombre" />
         </div>
 
@@ -37,7 +28,7 @@
           <select id="tipo">
             <option value="">Seleccionar...</option>
             <option value="grano">Grano</option>
-            <option value="tuberculo">Tuberculo</option>
+            <option value="tuberculo">Tubérculo</option>
             <option value="fruta">Fruta</option>
             <option value="hortaliza">Hortaliza</option>
             <option value="otros">Otros</option>
@@ -48,11 +39,17 @@
           <button type="submit" class="guardar">Guardar</button>
           <button type="button" class="cancelar">Cancelar</button>
         </div>
-      </form>
+      </div>
     </section>
 
+    <!-- 🖼️ Contenedor de la imagen -->
     <section class="imagen-section">
-      <img src="https://img.lalr.co/cms/2019/07/25190004/Diacol-Capiro-R12-papa-AN.jpg" alt="Papas" />
+      <div class="imagen-container">
+        <img
+          src="https://img.lalr.co/cms/2019/07/25190004/Diacol-Capiro-R12-papa-AN.jpg"
+          alt="Papas"
+        />
+      </div>
     </section>
   </main>
 </div>
