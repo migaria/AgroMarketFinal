@@ -1,0 +1,160 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #e6f4d9;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.carrito-container {
+  background-color: #c7e3a1;
+  border-radius: 15px;
+  width: 850px;
+  margin: 30px auto;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Encabezado */
+header {
+  display: flex;
+  align-items: center;
+  background-color: #1a6b1a;
+  color: #d4ff7f;
+  padding: 10px 20px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+header .logo {
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
+}
+
+header h1 {
+  flex: 1;
+  text-align: center;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+/* Productos */
+.productos {
+  padding: 20px;
+}
+
+.producto {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: #b3d98f;
+  border-radius: 25px;
+  padding: 10px 15px;
+  justify-content: space-between;
+}
+
+.producto img {
+  width: 100px;
+  height: 90px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  padding-left: 15px;
+}
+
+.nombre {
+  background-color: #386b2b;
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 25px;
+  font-weight: bold;
+  width: fit-content;
+  margin-bottom: 8px;
+}
+
+.cantidad {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1a4a1a;
+  font-weight: 500;
+}
+
+.cantidad button {
+  background-color: #2e6b35;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.cantidad button:hover {
+  background-color: #1f471f;
+}
+
+.cantidad input {
+  width: 45px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #a0c184;
+  padding: 3px;
+}
+
+.precio {
+  background-color: #d3f0c2;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-weight: bold;
+  min-width: 110px;
+  text-align: center;
+}
+
+/* Totales */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+.totales {
+  font-size: 18px;
+  color: #173f17;
+}
+
+.linea {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.linea.total span {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.btn-comprar {
+  background-color: #3c7a3c;
+  color: #fff;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-comprar:hover {
+  background-color: #2b5d2b;
+}
+
