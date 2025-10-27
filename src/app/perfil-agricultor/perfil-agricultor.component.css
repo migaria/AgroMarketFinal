@@ -13,7 +13,7 @@
 /* ENCABEZADO */
 .header {
   background-color: #09730a;
-  color: #b8dc95;
+  width: 100%;
   text-align: center;
   padding: 30px 0;
 }
@@ -40,7 +40,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
+  padding: 1px;
 }
 
 .form-container {
@@ -51,19 +51,19 @@
 .form-container h2 {
   color: #004d26;
   font-size: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   text-align: left;
 }
 
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 label {
   display: block;
   font-size: 20px;
   color: #004d26;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 input,
@@ -72,7 +72,7 @@ select {
   max-width: 450px; /* mismo ancho exacto */
   box-sizing: border-box;
   padding: 7px 10px;
-  font-size: 15px;
+  font-size: 13px;
   border-radius: 8px;
   border: 2px solid #0b5830;
   outline: none;
@@ -80,9 +80,9 @@ select {
 
 /* BOTONES*/
 .botones {
-  margin-top: 10px;
+  margin-top: 20px;
   display: flex;
-  gap: 20px;
+  gap: 5px;
 }
 
 button {
@@ -141,7 +141,7 @@ button:hover {
 .form-section {
   overflow: visible;
   align-items: flex-start;
-  padding-bottom: 100px; /* espacio extra para el desplegable */
+  padding-bottom: 120px; /* espacio extra para el desplegable */
 }
 
 select {
@@ -149,4 +149,15 @@ select {
   z-index: 5;
   background-color: #fff;
 }
+.mensaje-exito {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+}
+
 

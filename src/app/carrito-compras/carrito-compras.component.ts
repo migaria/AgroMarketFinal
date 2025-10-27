@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-carrito-compras',
-  imports: [],
+  standalone: true,
   templateUrl: './carrito-compras.component.html',
-  styleUrl: './carrito-compras.component.css'
+  styleUrls: ['./carrito-compras.component.css'],
+  imports: [RouterModule]
 })
 export class CarritoComprasComponent {
 

@@ -4,6 +4,7 @@ import { PerfilAgricultorComponent } from './perfil-agricultor/perfil-agricultor
 import { PerfilCompradorComponent } from './perfil-comprador/perfil-comprador.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
+import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' }, // 👈 login por defecto
@@ -11,5 +12,7 @@ export const routes: Routes = [
   { path: 'agricultor', component: PerfilAgricultorComponent },
   { path: 'comprador', component: PerfilCompradorComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'registrar', component: RegistrarComponent }
+  { path: 'registrar', component: RegistrarComponent },
+  { path: 'carrito', component: CarritoComprasComponent }
+
 ];
