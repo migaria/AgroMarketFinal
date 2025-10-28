@@ -1,34 +1,55 @@
 <div class="login-container">
   <header class="login-header">
-    <!-- Versión local -->
-    <h1>AGROMERCADO</h1>
-
-    <!-- Versión remota -->
-    <h1>AGROMERCADOoo</h1>
-
-    <link rel="stylesheet" href="login.component.css">
+    <h1>AGROMARKET</h1>
   </header>
 
-  <form class="login-form">
+  <form class="login-form" (ngSubmit)="iniciarSesion()" #loginForm="ngForm">
+
+    <!-- CORREO -->
     <div class="form-group">
       <label for="correo">Correo</label>
-      <input type="email" id="correo" placeholder="Ingresa tu correo" />
+      <input
+        type="email"
+        id="correo"
+        placeholder="Ingresa tu correo"
+        name="correo"
+        required
+        [(ngModel)]="correo"
+        #correoInput="ngModel"
+      />
+      <div class="error" *ngIf="correoInput.invalid && correoInput.touched">
+        El correo obligatorio.
+      </div>
     </div>
 
+    <!-- CONTRASEÑA -->
     <div class="form-group">
       <label for="password">Contraseña</label>
-      <input type="password" id="password" placeholder="Ingresa tu contraseña" />
+      <input
+        type="password"
+        id="password"
+        placeholder="Ingresa tu contraseña"
+        name="password"
+        required
+        maxlength="12"
+        [(ngModel)]="password"
+        #passwordInput="ngModel"
+      />
+      <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">
+       contraseña máximo 8 caracteres.
+      </div>
     </div>
 
+    <!-- OLVIDASTE TU CONTRASEÑA -->
     <div class="forgot-password">
-      <a href="#">¿Olvidaste tu contraseña?</a>
+      <a href="#" (click)="recuperarContrasena($event)">¿Olvidaste tu contraseña?</a>
     </div>
 
+    <!-- BOTONES -->
     <div class="button-group">
-  <button type="button" class="btn crear" routerLink="/registrar">Crear cuenta</button>
-    
-      <button type="button" class="btn iniciar" routerLink="/perfil">Iniciar sesión</button>
-
+      <button type="button" class="btn crear" (click)="irARegistrar()">Crear cuenta</button>
+      <button type="submit" class="btn iniciar" [disabled]="loginForm.invalid">Iniciar sesión</button>
     </div>
+
   </form>
 </div>

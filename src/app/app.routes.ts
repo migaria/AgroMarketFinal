@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
 
+
 export const routes: Routes = [
   { path: '', component: LoginComponent, pathMatch: 'full' }, // 👈 login por defecto
   { path: 'perfil', component: PerfilComponent },
