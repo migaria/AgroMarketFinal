@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-perfil-agricultor',
@@ -53,5 +54,10 @@ export class PerfilAgricultorComponent {
     this.precio = null;
     this.tipo = '';
     this.mensajeExito = '';
+  }
+  constructor(private location: Location) {}
+
+  regresar(): void {
+    this.location.back();
   }
 }

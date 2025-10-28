@@ -15,7 +15,7 @@
   background-color: #09730a;
   width: 100%;
   text-align: center;
-  padding: 30px 0;
+  padding: 25px 0;
 }
 
 .header h1 {
@@ -31,6 +31,36 @@
   justify-content: space-between;
   align-items: stretch;
   flex-wrap: wrap;
+}
+.agricultor-regresar {
+  display: flex;
+  align-items: center;     
+  gap: 40px;               
+  margin-bottom: 25px;     
+  margin-top: 10px; 
+  margin-left: -60px;
+}
+.btn-regresar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  padding: 0;
+  position: relative;
+  z-index: 90;
+}
+.btn-regresar:hover {
+  background-color: #7ab463;
+  transform: scale(1.02);
+}
+
+/* Icono */
+.icono {
+  width: 40px;
+  height: 40px;
 }
 
 /*FORMULARIO */
@@ -53,6 +83,7 @@
   font-size: 25px;
   margin-bottom: 30px;
   text-align: left;
+  
 }
 
 .form-group {
@@ -69,10 +100,10 @@ label {
 input,
 select {
   width: 90%;
-  max-width: 450px; /* mismo ancho exacto */
+  max-width: 400px; /* mismo ancho exacto */
   box-sizing: border-box;
   padding: 7px 10px;
-  font-size: 13px;
+  font-size: 12px;
   border-radius: 8px;
   border: 2px solid #0b5830;
   outline: none;
@@ -88,7 +119,7 @@ select {
 button {
   background-color: #8abf70;
   border: none;
-  padding: 9px 70px;
+  padding: 9px 57px;
   border-radius: 40px;
   font-size: 20px;
   font-weight: bold;
@@ -98,6 +129,7 @@ button {
 
 button:hover {
   background-color: #7ab463;
+  
 }
 
 /*IMAGEN */

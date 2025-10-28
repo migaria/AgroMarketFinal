@@ -31,6 +31,35 @@
   flex-wrap: wrap;
   gap: px;
 }
+/* BOTÓN REGRESAR Y TÍTULO */
+.comprador-regresar {
+  display: flex;
+  align-items: center;
+  gap: 140px;
+  margin: 10px 0 25px -160px;
+}
+
+.btn-regresar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-left: -20px;
+}
+
+.btn-regresar:hover {
+  background-color: #7ab463;
+  transform: scale(1.02);
+}
+
+.icono {
+  width: 40px;
+  height: 40px;
+}
 
 /* Sección de información (como el formulario) */
 .form-section {
@@ -42,10 +71,7 @@
 .form-container h2 {
   color: #004d26;
   font-size: 25px;
-  margin-bottom: 20px;
-  text-align: left;
-  position: relative;
-  right: 380px; 
+  margin: 0;
 }
 
 

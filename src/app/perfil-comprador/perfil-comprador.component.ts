@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-perfil-comprador',
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./perfil-comprador.component.css']
 })
 export class PerfilCompradorComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private location: Location) {}
 
   agregarAlCarrito() {
     // Aquí podrías guardar el producto en una lista o mostrar un mensaje
@@ -16,6 +18,11 @@ export class PerfilCompradorComponent {
 
     // Luego redirigir al carrito
     this.router.navigate(['/carrito']);
+  }
+  
+
+  regresar(): void {
+    this.location.back();
   }
 
 }

@@ -67,17 +67,36 @@
 }
 .perfil-regresar {
   display: flex;
-  justify-content: flex-start; /* mueve el icono a la derecha */
-  margin-right: 30px; /* ajusta la distancia del borde derecho */
-  margin-top: -20px; 
+  align-items: center;
+  gap: 100px;
+  margin: -20px 0 -30px -80px;
+}
+.btn-regresar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+  padding: 1px;
+  margin-left: -10; 
+  position: relative;
+  z-index: 5;
 }
 
+button:hover {
+  background-color: #7ab463;
+  transform: scale(1.02);
+}
 
 /* Icono */
 .icono {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.icono:hover {
+  transform: scale(1.1);
 }
 
 /* Botón */
@@ -96,6 +115,7 @@
 .btn-perfil:hover {
   background-color: #1d4728;
   color: #fff;
+  
 }
 
 /* Imagen a la derecha */
