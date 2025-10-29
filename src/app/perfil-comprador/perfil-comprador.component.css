@@ -93,7 +93,7 @@
 
 .titulo-productos {
   position: absolute;
-  top: -20px; /* sube el título sobre las imágenes */
+  top: -20px; 
   left: 50%;
   transform: translateX(-50%);
   background: rgba(199, 233, 176, 0.95);
@@ -111,7 +111,7 @@
   flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
-  margin-top: 1px; /* espacio para que el título no tape las tarjetas */
+  margin-top: 1px; 
 }
 
 /* Tarjeta de producto */

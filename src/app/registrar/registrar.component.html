@@ -1,50 +1,73 @@
- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Agromarket</title>
-    <link rel="stylesheet" href="registrar.component.css">
-</head>
-<body>
-    <div class="contenedor-formulario">
-        <header class="encabezado">
-            <h1>AGROMARKET</h1>
-        </header>
-     <div class="contenido">
-        <form  class="formulario">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="ingresa tu nombre">
+<div class="contenedor-formulario">
+  <header class="encabezado">
+    <h1>AGROMARKET</h1>
+  </header>
 
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" placeholder="correo@gmail.com">
+  <div class="contenido">
+    <form class="formulario" (ngSubmit)="registrar()" #formRegistro="ngForm">
 
-            <label for="telefono">Telefono</label>
-            <input type="tel" id="telefono" placeholder="numero de telefono">
+      <label for="nombre">Nombre</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        placeholder="Ingresa tu nombre"
+        [(ngModel)]="usuario.nombre"
+        (input)="validarNombre($event)"
+        required
+        maxlength="25"
+      />
 
-            <label for="contraseña">Contraseña</label>
-            <input type="password" id="contraseña" placeholder="confirma tu contraseña">
+      <label for="correo">Correo</label>
+      <input
+        type="email"
+        id="correo"
+        name="correo"
+        placeholder="correo@gmail.com"
+        [(ngModel)]="usuario.correo"
+        required
+        maxlength="10"
+      />
 
-            <label for="confirmar">confirmar contraseña</label>
-            <input type="password" id="contraseña" placeholder="confirmar contraseña">
+      <label for="telefono">Teléfono</label>
+      <input
+        type="tel"
+        id="telefono"
+        name="telefono"
+        placeholder="Número de teléfono"
+        [(ngModel)]="usuario.telefono"
+        (input)="validarTelefono($event)"
+        required
+        maxlength="10"
+      />
 
+      <label for="password">password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="password"
+        [(ngModel)]="usuario.password"
+        required
+        maxlength="10"
+      />
 
-            
+      <label for="confirmar">Confirmar password</label>
+      <input
+        type="password"
+        id="confirmar"
+        name="confirmar"
+        placeholder="Confirmar password"
+        [(ngModel)]="usuario.confirmar"
+        required
+        maxlength="10"
+      />
 
-        <div class="botones">
-        <a href=""><button type="button" class="crear">Crear</button></a>
-                
-                <button type="reset" class="cancelar">Cancelar</button>
-
-            </div>
-
-        </form>
-       
-
-     </div>   
-
-    </div>
-</body>
-</html>
-
+      <div class="botones">
+        <button type="submit" class="crear">Crear</button>
+        <button type="reset" class="cancelar">Cancelar</button>
+      </div>
+       <p class="mensaje-exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+    </form>
+  </div>
+</div>

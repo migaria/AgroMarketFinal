@@ -100,12 +100,12 @@ label {
 input,
 select {
   width: 90%;
-  max-width: 400px; /* mismo ancho exacto */
+  max-width: 400px;
   box-sizing: border-box;
   padding: 7px 10px;
   font-size: 12px;
   border-radius: 8px;
-  border: 2px solid #0b5830;
+  border: 1px solid #0b5830;
   outline: none;
 }
 
@@ -173,7 +173,7 @@ button:hover {
 .form-section {
   overflow: visible;
   align-items: flex-start;
-  padding-bottom: 120px; /* espacio extra para el desplegable */
+  padding-bottom: 120px; 
 }
 
 select {

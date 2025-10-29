@@ -28,7 +28,6 @@ export class LoginComponent {
 
     // Validar correo y contraseña
     if (this.correo === this.correoguardado && this.password === this.passwordguardada) {
-      // Redirigir a perfil
       this.router.navigate(['/perfil']);
     } else {
       alert('Correo o contraseña incorrectos');
@@ -37,7 +36,8 @@ export class LoginComponent {
 
   recuperarContrasena(event: Event) {
     event.preventDefault();
-    console.log('Recuperar contraseña');
+     alert('Revisa tu correo, te enviamos un enlace para recuperar tu cuenta.');
+
   }
   irARegistrar() {
     this.router.navigate(['/registrar']);

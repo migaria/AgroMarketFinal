@@ -13,10 +13,8 @@ export class PerfilCompradorComponent {
   constructor(private router: Router, private location: Location) {}
 
   agregarAlCarrito() {
-    // Aquí podrías guardar el producto en una lista o mostrar un mensaje
     console.log('Producto agregado al carrito');
-
-    // Luego redirigir al carrito
+    
     this.router.navigate(['/carrito']);
   }
   
