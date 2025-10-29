@@ -46,6 +46,9 @@ export class RegistrarComponent {
         alert(' password no coinciden.');
         return;
       }
+      // Guardar usuario en el localStorage
+      const usuarioData = { nombre, correo, telefono, password };
+      localStorage.setItem('usuarioRegistrado', JSON.stringify(usuarioData));
       
       // Mensaje de éxito
       this.mensajeExito = '✅ Registro exitoso. Redirigiendo al login...';
@@ -55,9 +58,16 @@ export class RegistrarComponent {
       setTimeout(() => {
         this.router.navigate(['/login']);
       }, 2000);
-      
       } else {
       alert('Por favor, completa todos los campos.');
     }
+    
   }
+  cancelar(form: any) {
+  // Limpia todos los campos
+  form.resetForm();
+
+  // Redirige al login
+  this.router.navigate(['/login']);
+}
 }

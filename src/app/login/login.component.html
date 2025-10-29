@@ -29,12 +29,11 @@
         placeholder="Ingresa tu password"
         name="password"
         required
-        maxlength="12"
+        maxlength="8"
         [(ngModel)]="password"
         #passwordInput="ngModel"
       />
       <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">
-       contraseña máximo 8 caracteres.
       </div>
     </div>
 

@@ -65,7 +65,8 @@
 
       <div class="botones">
         <button type="submit" class="crear">Crear</button>
-        <button type="reset" class="cancelar">Cancelar</button>
+        <button type="button" class="cancelar" (click)="cancelar(formRegistro)">Cancelar</button>
+
       </div>
        <p class="mensaje-exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
     </form>

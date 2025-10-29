@@ -14,33 +14,38 @@ export class LoginComponent {
   correo = '';
   password = '';
 
-  correoguardado = 'user@12';
-  passwordguardada = 'user123';
-
   constructor(private router: Router) {}
 
-  iniciarSesion() {
-    // Validar campos vacíos
-    if (!this.correo || !this.password) {
-      alert('Por favor completa todos los campos');
-      return;
-    }
-
-    // Validar correo y contraseña
-    if (this.correo === this.correoguardado && this.password === this.passwordguardada) {
-      this.router.navigate(['/perfil']);
-    } else {
-      alert('Correo o contraseña incorrectos');
-    }
-  }
-
-  recuperarContrasena(event: Event) {
-    event.preventDefault();
-     alert('Revisa tu correo, te enviamos un enlace para recuperar tu cuenta.');
-
-  }
+  // Navegar a registrar
   irARegistrar() {
     this.router.navigate(['/registrar']);
+  }
+
+  // Recuperar password 
+  recuperarContrasena(event: Event) {
+    event.preventDefault();
+    alert(' se enviara un correo, para que puedas recuperar la cuenta.');
+  }
+
+  // Iniciar sesión
+  iniciarSesion() {
+    const usuarioGuardado = localStorage.getItem('usuarioRegistrado');
+
+    if (usuarioGuardado) {
+      const usuario = JSON.parse(usuarioGuardado);
+
+      if (this.correo === usuario.correo && this.password === usuario.password) {
+        alert('✅ Inicio de sesión exitoso');
+
+        // Guardar sesion activa
+        localStorage.setItem('usuarioActivo', JSON.stringify(usuario));
+
+        // Redirigir al perfil
+        this.router.navigate(['/perfil']);
+      } else {
+        alert('❌ Credenciales incorrectas');
+      }
+    }
   }
 
 }
