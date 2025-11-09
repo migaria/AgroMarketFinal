@@ -6,7 +6,7 @@
   <div class="contenido">
     <form class="formulario" (ngSubmit)="registrar()" #formRegistro="ngForm">
 
-      <label for="nombre">Nombre</label>
+      <label for="nombre">Nombre Completo</label>
       <input
         type="text"
         id="nombre"
@@ -15,7 +15,7 @@
         [(ngModel)]="usuario.nombre"
         (input)="validarNombre($event)"
         required
-        maxlength="25"
+        maxlength="60"
       />
 
       <label for="correo">Correo</label>
@@ -38,7 +38,7 @@
         [(ngModel)]="usuario.telefono"
         (input)="validarTelefono($event)"
         required
-        maxlength="10"
+        maxlength="12"
       />
 
       <label for="password">password</label>
@@ -46,10 +46,12 @@
         type="password"
         id="password"
         name="password"
-        placeholder="password"
+        placeholder="Debe tener al menos 8 caracteres e incluir letras y números"
         [(ngModel)]="usuario.password"
         required
+        minlength="8"
         maxlength="20"
+        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
       />
 
       <label for="confirmar">Confirmar password</label>
