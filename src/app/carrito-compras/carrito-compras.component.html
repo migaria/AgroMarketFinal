@@ -1,119 +1,69 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carrito de Compras - Agromarket</title>
-  <link rel="stylesheet" href="carrito-compras.component.css">
-</head>
-<body>
-  <div class="carrito-container">
-    <header>
-      <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="Logo carrito" class="logo">
-      <h1>CARRITO DE COMPRAS</h1>
-    </header>
+<div class="carrito-container">
+  <header>
+    <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
+         alt="Logo carrito" class="logo">
+    <h1>CARRITO DE COMPRAS</h1>
+  </header>
 
-    <section class="productos">
-      <!-- Producto Papa -->
-      <div class="producto">
-        <img src="https://cdn.pixabay.com/photo/2020/08/13/07/44/potatoes-5483686_1280.jpg" alt="Papa">
-        <div class="info">
-          <div class="nombre">PAPA</div>
-          <div class="cantidad">
-            <span>cantidad</span>
-            <button class="menos">-</button>
-            <input type="number" value="1" min="1">
-            <button class="mas">+</button>
-          </div>
-        </div>
-        <div class="precio" data-precio="50000">50.000</div>
-      </div>
+  <section class="productos">
 
-      <!-- Producto Café -->
-      <div class="producto">
-        <img src="https://cdn.pixabay.com/photo/2016/03/27/18/10/coffee-1284016_1280.jpg" alt="Café">
-        <div class="info">
-          <div class="nombre">CAFE</div>
-          <div class="cantidad">
-            <span>cantidad</span>
-            <button class="menos">-</button>
-            <input type="number" value="1" min="1">
-            <button class="mas">+</button>
-          </div>
-        </div>
-        <div class="precio" data-precio="1400000">1.400.000</div>
-      </div>
+    <!-- ✅ MOSTRAR CARRITO VACÍO -->
+    <div *ngIf="carrito.length === 0" class="vacio">
+      <p>No hay productos en el carrito.</p>
+    </div>
 
-      <!-- Producto Tomate -->
-      <div class="producto">
-        <img src="https://cdn.pixabay.com/photo/2017/01/20/15/06/tomatoes-1992391_1280.jpg" alt="Tomate">
-        <div class="info">
-          <div class="nombre">TOMATE</div>
-          <div class="cantidad">
-            <span>cantidad</span>
-            <button class="menos">-</button>
-            <input type="number" value="1" min="1">
-            <button class="mas">+</button>
-          </div>
-        </div>
-        <div class="precio" data-precio="80000">80.000</div>
-      </div>
-    </section>
+    <!-- ✅ LISTA DE PRODUCTOS EN EL CARRITO -->
+    <div class="producto" *ngFor="let item of carrito">
 
-    <footer>
-      <div class="totales">
-        <div class="linea">
-          <span>Subtotal</span>
-          <span id="subtotal">1.530.000</span>
+      <img 
+        [src]="item.producto.imagen"
+        [alt]="item.producto.nombre"
+        class="imagen-producto"
+      />
+
+      <div class="info">
+
+        <div class="nombre">{{ item.producto.nombre | uppercase }}</div>
+
+        <div class="precio-kg">
+          <strong>Precio:</strong> {{ item.producto.precio | currency:'COP' }}
         </div>
-        <div class="linea total">
-          <span>Total</span>
-          <span id="total">1.600.000</span>
+
+        <div class="cantidad">
+          <span>Cantidad</span>
+
+          <button class="menos" (click)="restar(item)">-</button>
+
+          <input type="number" 
+                 [value]="item.cantidad" 
+                 readonly>
+
+          <button class="mas" (click)="sumar(item)">+</button>
         </div>
       </div>
-      <button class="btn-comprar">Comprar</button>
-    </footer>
-  </div>
 
-  <script>
-    // Script para actualizar precios y totales
-    const productos = document.querySelectorAll('.producto');
-    const subtotalElem = document.getElementById('subtotal');
-    const totalElem = document.getElementById('total');
+      <!-- ✅ TOTAL POR PRODUCTO -->
+      <div class="precio-total">
+        {{ (item.producto.precio * item.cantidad) | currency:'COP' }}
+      </div>
 
-    function actualizarTotales() {
-      let subtotal = 0;
-      productos.forEach(p => {
-        const precioUnitario = parseInt(p.querySelector('.precio').dataset.precio);
-        const cantidad = parseInt(p.querySelector('input').value);
-        const precioTotal = precioUnitario * cantidad;
-        p.querySelector('.precio').textContent = precioTotal.toLocaleString('es-CO');
-        subtotal += precioTotal;
-      });
-      subtotalElem.textContent = subtotal.toLocaleString('es-CO');
-      const total = subtotal; // puedes agregar IVA si deseas
-      totalElem.textContent = total.toLocaleString('es-CO');
-    }
+    </div>
+  </section>
 
-    productos.forEach(p => {
-      const menos = p.querySelector('.menos');
-      const mas = p.querySelector('.mas');
-      const input = p.querySelector('input');
+  <!-- ✅ SECCIÓN DE TOTALES -->
+  <footer *ngIf="carrito.length > 0">
+    <div class="totales">
+      <div class="linea">
+        <span>Subtotal</span>
+        <span>{{ total | currency:'COP' }}</span>
+      </div>
 
-      menos.addEventListener('click', () => {
-        if (input.value > 1) {
-          input.value--;
-          actualizarTotales();
-        }
-      });
-      mas.addEventListener('click', () => {
-        input.value++;
-        actualizarTotales();
-      });
-      input.addEventListener('change', actualizarTotales);
-    });
+      <div class="linea total">
+        <span>Total</span>
+        <span>{{ total | currency:'COP' }}</span>
+      </div>
+    </div>
 
-    actualizarTotales();
-  </script>
-</body>
-</html>
+    <button class="btn-comprar">Comprar</button>
+  </footer>
+</div>

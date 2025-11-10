@@ -22,6 +22,9 @@ export class RegistrarComponent {
   mensajeExito = ''; 
 
   constructor(private router: Router) {}
+  regresar() {
+  this.router.navigate(['/login']);
+}
 
   validarNombre(event: Event) {
     const input = event.target as HTMLInputElement;

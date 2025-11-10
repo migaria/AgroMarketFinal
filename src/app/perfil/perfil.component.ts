@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-perfil',
@@ -12,9 +12,15 @@ import { Location } from '@angular/common';
 })
 
 export class PerfilComponent {
-  constructor(private location: Location) {}
+  constructor(private router: Router) {}
 
-  regresar(): void {
-    this.location.back();
+  cerrarSesion(): void {
+    // Limpia datos guardados de sesión o usuario
+    //localStorage.clear();
+    //sessionStorage.clear();
+    // Redirige al login
+    this.router.navigate(['/login']);
+    // Muestra mensaje opcional
+    alert('Sesión cerrada correctamente.');
   }
 }

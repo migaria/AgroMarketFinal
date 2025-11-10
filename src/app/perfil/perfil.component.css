@@ -65,11 +65,11 @@
   align-items: center;
   gap: 15px;
 }
-.perfil-regresar {
+.perfil-cerrarsesion {
   display: flex;
   align-items: center;
   gap: 100px;
-  margin: -20px 0 -30px -80px;
+  margin: -50px 0 30px 1150px;
 }
 .btn-regresar {
   background: none;

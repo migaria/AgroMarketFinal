@@ -2,6 +2,16 @@
   <header class="encabezado">
     <h1>AGROMARKET</h1>
   </header>
+  <div class="registrar-regresar">
+    <button class="btn-regresar" (click)="regresar()">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png"
+        alt="icono agricultor"
+        class="icono"
+      />
+    </button>
+    <h2>registrate</h2>
+  </div>
 
   <div class="contenido">
     <form class="formulario" (ngSubmit)="registrar()" #formRegistro="ngForm">
