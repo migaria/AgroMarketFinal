@@ -22,6 +22,9 @@ export class RegistrarComponent {
   mensajeExito = ''; 
 
   constructor(private router: Router) {}
+  regresar() {
+  this.router.navigate(['/login']);
+}
 
   validarNombre(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -39,13 +42,18 @@ export class RegistrarComponent {
 
   registrar() {
     const { nombre, correo, telefono, password, confirmar } = this.usuario;
-
+    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
      if (nombre && correo && telefono && password && confirmar) {
       if (password !== confirmar) {
         alert(' password no coinciden.');
         return;
       }
+      // Validar formato de contraseña
+    if (!regexPassword.test(password)) {
+      alert('⚠️ La contraseña debe tener al menos 8 caracteres e incluir letras y números.');
+      return;
+    }
       // Guardar usuario en el localStorage
       const usuarioData = { nombre, correo, telefono, password };
       localStorage.setItem('usuarioRegistrado', JSON.stringify(usuarioData));
@@ -63,21 +71,15 @@ export class RegistrarComponent {
     }
     
   }
-cancelar() {
- 
-  this.usuario = {
+  cancelar() {
+    this.usuario ={
     nombre: '',
     correo: '',
     telefono: '',
     password: '',
     confirmar: ''
   };
-  
-  this.mensajeExito = '';
- 
+  this.mensajeExito='';
 }
-
-
- 
 }
 

@@ -19,7 +19,7 @@
           </div>
         <div class="form-group">
           <label for="nombre">Nombre producto</label>
-          <input type="text" id="nombre"  maxlength="8"
+          <input type="text" id="nombre"  maxlength="30"
           required
           (input)="soloLetras($event)"
           [(ngModel)]="nombre"
@@ -29,15 +29,12 @@
 
         <div class="form-group">
           <label for="cantidad">Cantidad Kg</label>
-          <input type="text" id="cantidad" maxlength="3"
+          <input type="text" id="cantidad" maxlength="5"
            required
            (input)="soloNumeros($event)"
            [(ngModel)]="cantidad"     
             name="cantidad" 
            />
-           <small class="error" *ngIf="cantidadInvalida">
-           cantidad debe ser al menos 1.
-          </small>
         </div>
 
         <div class="form-group">
@@ -48,6 +45,14 @@
            [(ngModel)]="precio"   
             name="precio"
            />
+        </div>
+         <div class="form-group">
+          <label for="imagen">URL imagen</label>
+          <input type="text" id="imagen"
+            placeholder="https://miservidor.com/imagen.jpg"
+            [(ngModel)]="imagen"
+            name="imagen"
+          />
         </div>
 
         <div class="form-group">
@@ -64,7 +69,8 @@
 
         <div class="botones">
           <button type="button" class="guardar" (click)="guardar()">Guardar</button>
-          <button type="button" class="cancelar" (click)="cancelar()">Cancelar</button>
+          <button type="button" class="cancelar" (click)="cancelar()">Limpiar</button>
+          <button type="button" class="eliminar" (click)="eliminar()">Eliminar</button>
         </div>
         <p class="mensaje-exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
       </div>

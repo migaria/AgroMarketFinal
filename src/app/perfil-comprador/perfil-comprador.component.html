@@ -19,49 +19,34 @@
       </div>
 
       <div class="productos-container">
-        <div class="producto">
+
+        <div class="producto" *ngFor="let p of productos">
           <img
-            src="https://www.shutterstock.com/image-photo/freshly-harvested-potatoes-fieldharvesting-organic-260nw-2577274295.jpg"
-            alt="Papa"
+            [src]="p.imagen"
+            [alt]="p.nombre"
           />
           <div class="info">
-            <h3>PAPA</h3>
-            <p><strong>Cantidad Kg:</strong> 100 </p>
-            <p><strong>Precio Kg:</strong> 3.000 </p>
-            <p>La papa es un tubérculo esencial en la alimentación diaria.</p>
-            <button class="btn" (click)="agregarAlCarrito()">Agregar al carrito</button>
+              <h3>{{ p.nombre | uppercase }}</h3>
+
+              <p><strong>Cantidad Kg:</strong> {{ p.cantidad }} </p>
+              <p><strong>Precio Kg:</strong> {{ p.precio | currency:'COP' }} </p>
+
+              <p>Tipo: {{ p.tipo }}</p>
+
+              <button class="btn"
+                      (click)="agregarAlCarrito(p)"
+                      [disabled]="p.cantidad <= 0">
+                Agregar al carrito
+              </button>
+            </div>
+
           </div>
+
         </div>
 
-        <div class="producto">
-          <img
-            src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ5UX4PvN09K7ORzJ9t14CT7r1IrQooNKrTKnFOeyeOTH9YWQRi"
-            alt="Café"
-          />
-          <div class="info">
-            <h3>CAFÉ</h3>
-            <p><strong>Cantidad Kg:</strong> 900 </p>
-            <p><strong>Precio Kg:</strong> 24.000 </p>
-            <p>El café colombiano es reconocido por su aroma y sabor excepcionales.</p>
-            <button class="btn" (click)="agregarAlCarrito()">Agregar al carrito</button>
-          </div>
-        </div>
+      </div>
+    </section>
 
-        <div class="producto">
-          <img
-            src="https://img.lalr.co/cms/2021/04/19103902/Cultivo-de-tomate.jpg?r=1_1"
-            alt="Tomate"
-          />
-          <div class="info">
-            <h3>TOMATE</h3>
-            <p><strong>Cantidad Kg:</strong> 100 </p>
-            <p><strong>Precio Kg:</strong> 6.000 </p>
-            <p>El tomate es ideal para salsas, ensaladas y platos frescos.</p>
-            <button class="btn" (click)="agregarAlCarrito()">Agregar al carrito</button>
-          </div>
-         </div>
-       </div>
-     </div>
-   </section>
- </main>
+  </main>
+
 </div>

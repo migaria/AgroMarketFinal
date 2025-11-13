@@ -32,7 +32,7 @@
 
 .form-group {
   margin-bottom: 25px;
-  width: 80%;
+  width: 350px;
 }
 
 label {
@@ -52,7 +52,7 @@ input {
 }
 
 .forgot-password {
-  margin-top: -10px;
+  margin-top: -5px;
   margin-bottom: 25px;
 }
 
@@ -67,20 +67,20 @@ input {
   display: flex;
   justify-content: column;
   align-items: center;
-  gap: 5px;
+  gap: 1px;
   
 }
 
 .btn {
   background-color: #8abf70;
   border: none;
-  padding: 9px 45px;
+  padding: 9px 25px;
   border-radius: 40px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  transition: background 0.3s 
-ease;
+  transition: background 0.3s ease;
+  margin-left: 18px;
 }
 
 .btn:hover {

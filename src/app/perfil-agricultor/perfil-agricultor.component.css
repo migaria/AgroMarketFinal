@@ -36,9 +36,9 @@
   display: flex;
   align-items: center;     
   gap: 40px;               
-  margin-bottom: 25px;     
-  margin-top: 10px; 
-  margin-left: -60px;
+  margin-bottom: 20px;     
+  margin-top: 1px; 
+  margin-left: -40px;
 }
 .btn-regresar {
   background: none;
@@ -46,7 +46,7 @@
   cursor: pointer;
   border-radius: 50%;
   width: 35px;
-  height: 35px;
+  height: 25px;
   transition: background-color 0.2s ease, transform 0.2s ease;
   padding: 0;
   position: relative;
@@ -81,7 +81,7 @@
 .form-container h2 {
   color: #004d26;
   font-size: 25px;
-  margin-bottom: 30px;
+  margin-bottom: 2px;
   text-align: left;
   
 }
@@ -111,20 +111,21 @@ select {
 
 /* BOTONES*/
 .botones {
-  margin-top: 20px;
+  margin-top: 25px;
   display: flex;
-  gap: 5px;
+  gap: 20px;
 }
 
 button {
   background-color: #8abf70;
   border: none;
-  padding: 9px 57px;
+  padding: 9px 32px;
   border-radius: 40px;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease;
+   margin-left: -16px; 
 }
 
 button:hover {

@@ -77,7 +77,7 @@
 
 .descripcion {
   font-size: 1rem;
-  color: #333;
+  color: #0a0a0a;
   line-height: 1.5;
 }
 
@@ -153,14 +153,12 @@
 
 .btn {
   background-color: #7ab463;
-  color: #0e0d0d;
   border: none;
-  padding: 12px 0;
-  width: 90%;
-  border-radius: 25px;
+  padding: 9px 15px;
+  border-radius: 40px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
   transition: background-color 0.3s;
 }
 
