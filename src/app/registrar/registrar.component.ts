@@ -63,11 +63,21 @@ export class RegistrarComponent {
     }
     
   }
-  cancelar(form: any) {
-  // Limpia todos los campos
-  form.resetForm();
+cancelar() {
+ 
+  this.usuario = {
+    nombre: '',
+    correo: '',
+    telefono: '',
+    password: '',
+    confirmar: ''
+  };
+  
+  this.mensajeExito = '';
+ 
+}
 
-  // Redirige al login
-  this.router.navigate(['/login']);
+
+ 
 }
-}
+
