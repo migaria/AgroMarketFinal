@@ -8,7 +8,7 @@ import { CarritoComprasComponent } from './carrito-compras/carrito-compras.compo
 import { InicioComponent } from './inicio/inicio.component';
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' }, // 👈 login por defecto
+  { path: '', component: InicioComponent, pathMatch: 'full' }, // 👈 login por defecto
   { path: 'perfil', component: PerfilComponent },
   { path: 'agricultor', component: PerfilAgricultorComponent },
   { path: 'comprador', component: PerfilCompradorComponent },
