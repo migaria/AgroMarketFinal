@@ -5,7 +5,7 @@ import { PerfilCompradorComponent } from './perfil-comprador/perfil-comprador.co
 import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
-import { InicioComponent } from './inicio/inicio.component';
+
 
 export const routes: Routes = [
   { path: '', component: InicioComponent, pathMatch: 'full' }, // 👈 login por defecto

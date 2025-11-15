@@ -31,11 +31,11 @@ body {
   color: #1d4728;
   font-size: 1.8rem;
   font-weight: bold;
-  margin: 0 0 30px 0;
-  text-transform: lowercase;
+  margin: 0 0 35px 0;
+  text-transform: uppercase;
   text-align: left;
-  padding-left: 20px;
-  margin-left: 10px;
+  padding-left: 1px;
+  
 }
 /* CONTENIDO GENERAL */
 .contenido {
@@ -45,10 +45,10 @@ body {
 .registrar-regresar {
   display: flex;
   align-items: center;     
-  gap: 350px;               
+  gap: 450px;               
   margin-bottom: -15px;     
   margin-top: 10px; 
-  margin-left: -650px;
+  margin-left: -550px;
 }
 
 .btn-regresar {

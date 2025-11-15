@@ -19,6 +19,8 @@ export class PerfilAgricultorComponent {
   mensajeExito = '';
   imagen = '';
 
+  imagenPreview: string | ArrayBuffer | null = null;
+  imagenArchivo: File | null = null;
 
   productos: Producto[] = [];
 
@@ -53,6 +55,20 @@ export class PerfilAgricultorComponent {
       input.value = input.value.replace(/^0+/, ''); 
   }
     this.precio = input.value ? Number(input.value) : null;
+  }
+   // ✅ Manejar la carga de imagen desde el PC
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.imagenArchivo = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagenPreview = reader.result;
+        this.imagen = reader.result as string; // se guarda como base64
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   guardar() {
@@ -90,24 +106,9 @@ export class PerfilAgricultorComponent {
     this.precio = null;
     this.tipo = '';
     this.imagen = '';
+    this.imagenArchivo = null;
+    this.imagenPreview = null;
   }
-  eliminar() {
-  if (!this.nombre) {
-    this.mensajeExito = '❌ Escribe el nombre del producto que deseas eliminar.';
-    return;
-  }
-
-  const mensaje = this.inventario.eliminarPorNombre(this.nombre);
-  this.mensajeExito = mensaje;
-
-  // limpiar campos si se eliminó
-  if (mensaje.startsWith('✅')) {
-    this.cancelar();
-  }
-
-    setTimeout(() => this.mensajeExito = '', 3000);
-  }
-
 
   regresar() {
     this.location.back();
