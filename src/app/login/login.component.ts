@@ -14,7 +14,11 @@ export class LoginComponent {
   correo = '';
   password = '';
 
-  constructor(private router: Router) {}
+ constructor(
+  private router: Router,
+  
+  ) {}
+  ngOnInit() {}
 
   // Navegar a registrar
   irARegistrar() {
@@ -46,6 +50,9 @@ export class LoginComponent {
         alert('❌ Credenciales incorrectas');
       }
     }
+  }
+  regresar(): void {
+    this.router.navigate(['/inicio']);
   }
 
 }

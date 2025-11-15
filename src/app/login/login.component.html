@@ -4,6 +4,16 @@
   </header>
 
   <form class="login-form" (ngSubmit)="iniciarSesion()" #loginForm="ngForm">
+    <div class="regresar">
+        <button class="btn-regresar" (click)="regresar()">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png"
+            alt="icono agricultor"
+            class="icono"
+          />
+          </button>
+      </div>
+
 
     <div class="form-group">
       <label for="correo">Correo</label>

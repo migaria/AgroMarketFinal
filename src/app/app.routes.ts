@@ -5,15 +5,17 @@ import { PerfilCompradorComponent } from './perfil-comprador/perfil-comprador.co
 import { LoginComponent } from './login/login.component';
 import { RegistrarComponent } from './registrar/registrar.component';
 import { CarritoComprasComponent } from './carrito-compras/carrito-compras.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent, pathMatch: 'full' }, // 👈 login por defecto
+  { path: '', component: InicioComponent, pathMatch: 'full' }, // 👈 login por defecto
   { path: 'perfil', component: PerfilComponent },
   { path: 'agricultor', component: PerfilAgricultorComponent },
   { path: 'comprador', component: PerfilCompradorComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrar', component: RegistrarComponent },
-  { path: 'carrito', component: CarritoComprasComponent }
+  { path: 'carrito', component: CarritoComprasComponent },
+  {path: 'inicio', component: InicioComponent}
 
 ];
