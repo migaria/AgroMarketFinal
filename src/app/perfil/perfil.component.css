@@ -34,10 +34,10 @@
   color: #1d4728;
   font-size: 1.8rem;
   font-weight: bold;
-  margin: 0 0 5px 0;
-  text-transform: lowercase;
+  margin: 0 0 15px 0;
+  
   text-align: left;
-  padding-left: 260px;
+  padding-left: 210px;
   margin-left: 10px;
 }
 
@@ -69,7 +69,7 @@
   display: flex;
   align-items: center;
   gap: 100px;
-  margin: -50px 0 30px 1150px;
+  margin: -70px 0 30px 1240px;
 }
 .btn-regresar {
   background: none;
@@ -78,9 +78,9 @@
   transition: transform 0.2s ease;
   border-radius: 50%;
   padding: 1px;
-  margin-left: -10; 
+  margin-top: 15px; 
   position: relative;
-  z-index: 5;
+  z-index: 5px;
 }
 
 button:hover {

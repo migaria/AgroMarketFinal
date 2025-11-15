@@ -27,35 +27,37 @@ export class InventarioService {
     this.cargarCarrito();
   }
 
-  // ======================================================
   // GUARDAR EN LOCAL STORAGE
-  // ======================================================
-
-  private guardarInventario() {
-    localStorage.setItem('inventario', JSON.stringify(this.productos));
+ private guardarInventario() {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('inventario', JSON.stringify(this.productos));
+    }
   }
 
   private guardarCarrito() {
-    localStorage.setItem('carrito', JSON.stringify(this.carrito));
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('carrito', JSON.stringify(this.carrito));
+    }
   }
 
   private cargarInventario() {
-    const datos = localStorage.getItem('inventario');
-    if (datos) {
-      this.productos = JSON.parse(datos);
+    if (typeof window !== 'undefined') {
+      const datos = localStorage.getItem('inventario');
+      if (datos) {
+        this.productos = JSON.parse(datos);
+      }
     }
   }
 
   private cargarCarrito() {
-    const datos = localStorage.getItem('carrito');
-    if (datos) {
-      this.carrito = JSON.parse(datos);
+    if (typeof window !== 'undefined') {
+      const datos = localStorage.getItem('carrito');
+      if (datos) {
+        this.carrito = JSON.parse(datos);
+      }
     }
   }
-
-  // ======================================================
-  //        AGREGAR PRODUCTO (MAPEO + VALIDACIONES)
-  // ======================================================
+  //AGREGAR PRODUCTO (MAPEO + VALIDACIONES)
   agregarProducto(producto: any): string {
 
     const nuevo: Producto = {
@@ -75,7 +77,8 @@ export class InventarioService {
        let mensaje = `✅ Producto existente encontrado. `;
 
       if (existente.tipo !== nuevo.tipo) {
-        return `⚠️ El producto "${nuevo.nombre}" ya existe pero con otro tipo (${existente.tipo}).`;
+      mensaje += `Se actualizó el tipo de ${existente.tipo} a ${nuevo.tipo}. `;
+      existente.tipo = nuevo.tipo;
       }
 
       if (existente.precio !== nuevo.precio) {
@@ -103,78 +106,60 @@ export class InventarioService {
   obtenerProductos(): Producto[] {
     return this.productos;
   }
-  // ✅ AGREGAR ESTA FUNCIÓN
   existeProducto(id: number): boolean {
    return this.productos.some(p => p.id === id);
-}
-  
-  eliminarPorNombre(nombre: string): string {
-  const index = this.productos.findIndex(
-    p => p.nombre.toLowerCase() === nombre.toLowerCase()
-  );
-
-  if (index === -1) {
-    return `❌ No se encontró el producto "${nombre}".`;
   }
 
-  const eliminado = this.productos[index].nombre;
-  const idDelProducto = this.productos[index].id;
-
-  this.productos.splice(index, 1);
-  this.guardarInventario();
-
-  // ✅ 2. ELIMINAR TAMBIÉN DEL CARRITO
-  this.carrito = this.carrito.filter(item => item.producto.id !== idDelProducto);
-  this.guardarCarrito();
-
-  return `✅ Producto "${eliminado}" eliminado correctamente.`;
-}
-
-  
-
-
-  // ======================================================
-  //                       CARRITO
-  // ======================================================
-
+  //CARRITO
   obtenerCarrito(): CarritoItem[] {
     return this.carrito;
   }
 
   agregarAlCarrito(producto: Producto) {
-    if (producto.cantidad <= 0) return;
-
-    const item = this.carrito.find(i => i.producto.id === producto.id);
-
-    if (item) {
-      item.cantidad++;
-      producto.cantidad--;
-    } else {
-      this.carrito.push({ producto, cantidad: 1 });
-      producto.cantidad--;
+    const existente = this.carrito.find(item => item.producto.id === producto.id);
+  if (existente) {
+    if (producto.cantidad > 0) {
+      existente.cantidad++;
+      producto.cantidad--; 
     }
-
-    this.guardarInventario();
-    this.guardarCarrito();
+  } else if (producto.cantidad > 0) {
+    this.carrito.push({ producto, cantidad: 1 });
+    producto.cantidad--; 
+  }
+  this.guardarInventario();
+  this.guardarCarrito();
   }
 
   sumarCantidad(item: CarritoItem) {
-    if (item.producto.cantidad > 0) {
-      item.cantidad++;
-      item.producto.cantidad--;
-      this.guardarInventario();
-      this.guardarCarrito();
+    const producto = this.productos.find(p => p.id === item.producto.id);
+  if (producto && producto.cantidad > 0) {
+    item.cantidad++;
+    producto.cantidad--;
+    this.guardarInventario();
+    this.guardarCarrito();
     }
   }
 
   restarCantidad(item: CarritoItem) {
-    if (item.cantidad > 1) {
-      item.cantidad--;
-      item.producto.cantidad++;
-      this.guardarInventario();
-      this.guardarCarrito();
-    }
+    const producto = this.productos.find(p => p.id === item.producto.id);
+  if (item.cantidad > 1) {
+    item.cantidad--;
+    if (producto) producto.cantidad++; 
+  } else {
+    this.carrito = this.carrito.filter(i => i !== item);
+    if (producto) producto.cantidad++; 
   }
+  this.guardarInventario();
+  this.guardarCarrito();  
+ }
+ //método para vaciar carrito tras la compra
+comprar(): string {
+  if (this.carrito.length === 0) return '🛒 El carrito está vacío.';
+  const total = this.obtenerTotal();
+  this.carrito = [];
+  this.guardarCarrito();
+  return `✅ Compra realizada con éxito. Total: $${total.toFixed(2)}`;
+ }
 
   obtenerTotal(): number {
     return this.carrito.reduce(
