@@ -82,3 +82,4 @@ export class RegistrarComponent {
   this.mensajeExito='';
 }
 }
+
