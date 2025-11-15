@@ -1,4 +1,4 @@
-/* Fondo general */
+
 .perfil-container {
   background-color: #b8db97;
   min-height: 100vh;
@@ -7,12 +7,11 @@
   align-items: center;
 }
 
-/* Encabezado */
 .perfil-header {
   background-color: #09730a;
   width: 100%;
   text-align: center;
-  padding: 30px 0;
+  padding: 45px 0;       
 }
 
 .perfil-header h1 {
@@ -22,73 +21,20 @@
   margin: 0;
 }
 
-/* Contenido principal */
-.perfil-main {
-  padding: 25px 15px;
-  text-align: center;
-  width: 100%;
-  max-width: 1100px;
-}
-
-.perfil-main h2 {
-  color: #1d4728;
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin: 0 0 15px 0;
-  
-  text-align: left;
-  padding-left: 210px;
-  margin-left: 10px;
-}
-
-/*Contenedor centrado y ordenado */
-.perfil-contenedor {
+/* Icono regresar / cerrar sesión */
+.perfil-cerrarsesion {
+  position: absolute;
+  top: 50px;       
+  right: 50px;    
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 6px;
 }
 
-/* Agricultor / Comprador */
-.perfil-opcion {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 65%;
-  max-width: 700px;
-  gap: 15px;
-}
-
-/* Columna izquierda icono y boton */
-.perfil-info {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-.perfil-cerrarsesion {
-  display: flex;
-  align-items: center;
-  gap: 100px;
-  margin: -70px 0 30px 1240px;
-}
-.perfil-cerrarsesion {
-  display: flex;
-  flex-direction: column;   /* texto arriba, botón abajo */
-  align-items: center;      /* centrar todo */
-  gap: 8px;                 /* espacio entre texto y botón */
-  margin: -60px 0 80px 1200px;
-}
-/* Texto "Cerrar sesión" */
-.texto-cerrar {
-  font-size: large;
-  font-weight: bold
-  ;
-  color: #000000;
-  margin: 0;
-}
-/* Botón circular negro */
+/* Botón circular */
 .btn-regresar {
-  background-color: #0a2a05;
+  background-color: #24641a;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -98,33 +44,62 @@
   border: none;
   cursor: pointer;
   transition: transform 0.2s ease;
-  border-radius: 50%;
-  padding: 1px;
-  margin-top: 15px; 
-  position: relative;
-  z-index: 5px;
 }
 
 .btn-regresar:hover {
-  transform: scale(1.05);
-}
-
-
-
-button:hover {
-  background-color: #7ab463;
-  transform: scale(1.02);
+  transform: scale(1.08);
 }
 
 /* Icono */
 .icono {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
+
 .icono:hover {
   transform: scale(1.1);
+}
+
+.perfil-main {
+  padding: 1px 1px;
+  text-align: center;
+  width: 100%;
+  max-width: 1500px;
+}
+
+/* Título "Seleccionar Perfil" */
+.perfil-main h2 {
+  color: #1d4728;
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: -340px;
+}
+
+/* Contenedor centrado */
+.perfil-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+
+.perfil-opcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  max-width: 750px;
+  gap: 15px;
+}
+
+.perfil-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 /* Botón */
@@ -143,10 +118,9 @@ button:hover {
 .btn-perfil:hover {
   background-color: #1d4728;
   color: #fff;
-  
 }
 
-/* Imagen a la derecha */
+/* Imagen derecha */
 .img-perfil {
   width: 310px;
   height: 180px;
@@ -154,7 +128,6 @@ button:hover {
   border-radius: 20px;
 }
 
-/*  Responsive */
 @media (max-width: 768px) {
   .perfil-opcion {
     flex-direction: column;
@@ -169,5 +142,9 @@ button:hover {
   .img-perfil {
     width: 90%;
     height: auto;
+  }
+
+  .btn-perfil {
+    padding: 12px 40px;
   }
 }

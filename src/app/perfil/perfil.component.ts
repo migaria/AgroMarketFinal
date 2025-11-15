@@ -19,7 +19,7 @@ export class PerfilComponent {
     //localStorage.clear();
     //sessionStorage.clear();
     // Redirige al login
-    this.router.navigate(['/login']);
+    this.router.navigate(['/inicio']);
     // Muestra mensaje opcional
     alert('Sesión cerrada correctamente.');
   }
