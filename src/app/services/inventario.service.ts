@@ -24,16 +24,13 @@ export class InventarioService {
   private carrito: CarritoItem[] = [];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    // Solo ejecutar en navegador (no en SSR)
     if (isPlatformBrowser(this.platformId)) {
       this.cargarInventario();
       this.cargarCarrito();
     }
   }
 
-  // ======================================================
-  // GUARDAR EN LOCAL STORAGE
-  // ======================================================
+  // ====== LOCAL STORAGE ======
 
   private guardarInventario() {
     if (isPlatformBrowser(this.platformId)) {
@@ -49,27 +46,19 @@ export class InventarioService {
 
   private cargarInventario() {
     if (!isPlatformBrowser(this.platformId)) return;
-
     const datos = localStorage.getItem('inventario');
-    if (datos) {
-      this.productos = JSON.parse(datos);
-    }
+    if (datos) this.productos = JSON.parse(datos);
   }
 
   private cargarCarrito() {
     if (!isPlatformBrowser(this.platformId)) return;
-
     const datos = localStorage.getItem('carrito');
-    if (datos) {
-      this.carrito = JSON.parse(datos);
-    }
+    if (datos) this.carrito = JSON.parse(datos);
   }
 
-  // ======================================================
-  //        AGREGAR PRODUCTO (MAPEO + VALIDACIONES)
-  // ======================================================
-  agregarProducto(producto: any): string {
+  // ====== AGREGAR PRODUCTO ======
 
+  agregarProducto(producto: any): string {
     const nuevo: Producto = {
       id: producto.id,
       nombre: producto.nombre.trim(),
@@ -84,32 +73,25 @@ export class InventarioService {
     );
 
     if (existente) {
-      let mensaje = `✅ Producto existente encontrado. `;
-
       if (existente.tipo !== nuevo.tipo) {
         return `⚠️ El producto "${nuevo.nombre}" ya existe pero con otro tipo (${existente.tipo}).`;
       }
 
       if (existente.precio !== nuevo.precio) {
-        mensaje += `Se actualizó el precio de ${existente.precio} a ${nuevo.precio}. `;
         existente.precio = nuevo.precio;
       }
 
       if (nuevo.imagen && existente.imagen !== nuevo.imagen) {
         existente.imagen = nuevo.imagen;
-        mensaje += ` Imagen actualizada.`;
       }
 
       existente.cantidad += nuevo.cantidad;
-      mensaje += `Cantidad total: ${existente.cantidad} Kg.`;
-
       this.guardarInventario();
       return `✅ Se actualizó la cantidad: ahora tienes ${existente.cantidad} Kg.`;
     }
 
     this.productos.push(nuevo);
     this.guardarInventario();
-
     return `✅ Producto "${nuevo.nombre}" agregado correctamente.`;
   }
 
@@ -126,9 +108,7 @@ export class InventarioService {
       p => p.nombre.toLowerCase() === nombre.toLowerCase()
     );
 
-    if (index === -1) {
-      return `❌ No se encontró el producto "${nombre}".`;
-    }
+    if (index === -1) return `❌ No se encontró el producto "${nombre}".`;
 
     const eliminado = this.productos[index].nombre;
     const idDelProducto = this.productos[index].id;
@@ -136,16 +116,13 @@ export class InventarioService {
     this.productos.splice(index, 1);
     this.guardarInventario();
 
-    // Eliminar también del carrito
     this.carrito = this.carrito.filter(item => item.producto.id !== idDelProducto);
     this.guardarCarrito();
 
     return `✅ Producto "${eliminado}" eliminado correctamente.`;
   }
 
-  // ======================================================
-  //                       CARRITO
-  // ======================================================
+  // ====== CARRITO ======
 
   obtenerCarrito(): CarritoItem[] {
     return this.carrito;
@@ -153,7 +130,6 @@ export class InventarioService {
 
   agregarAlCarrito(producto: Producto) {
     if (!isPlatformBrowser(this.platformId)) return;
-
     if (producto.cantidad <= 0) return;
 
     const item = this.carrito.find(i => i.producto.id === producto.id);
@@ -197,5 +173,10 @@ export class InventarioService {
       (total, item) => total + item.cantidad * item.producto.precio,
       0
     );
+  }
+
+  actualizarCarrito(carritoActualizado: CarritoItem[]) {
+    this.carrito = carritoActualizado;
+    this.guardarCarrito();
   }
 }

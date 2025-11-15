@@ -1,23 +1,77 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { InventarioService, Producto, CarritoItem } from '../services/inventario.service';
 
-import { PerfilCompradorComponent } from './perfil-comprador.component';
+@Component({
+  selector: 'app-perfil-comprador',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './perfil-comprador.component.html',
+  styleUrls: ['./perfil-comprador.component.css']
+})
+export class PerfilCompradorComponent {
 
-describe('PerfilCompradorComponent', () => {
-  let component: PerfilCompradorComponent;
-  let fixture: ComponentFixture<PerfilCompradorComponent>;
+  productos: Producto[] = [];
+  carrito: CarritoItem[] = [];
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [PerfilCompradorComponent]
-    })
-    .compileComponents();
+  panelAbierto: boolean = false;   // ⬅ Necesario
+  totalItems: number = 0;          // ⬅ Para el ícono del carrito
 
-    fixture = TestBed.createComponent(PerfilCompradorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  constructor(
+    private inventario: InventarioService,
+    private router: Router,
+    private location: Location
+  ) {}
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  ngOnInit() {
+    this.productos = this.inventario.obtenerProductos();
+    this.carrito = this.inventario.obtenerCarrito();
+    this.actualizarContador();
+  }
+
+  // ==========================
+  //      PANEL LATERAL
+  // ==========================
+  togglePanel() {
+    this.panelAbierto = !this.panelAbierto;
+  }
+
+  obtenerTotalItems(): number {
+    return this.carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  }
+
+  actualizarContador() {
+    this.totalItems = this.obtenerTotalItems();
+  }
+
+  // ==========================
+  //      CARRITO
+  // ==========================
+  agregarAlCarrito(producto: Producto) {
+    this.inventario.agregarAlCarrito(producto);
+    this.carrito = this.inventario.obtenerCarrito();
+    this.actualizarContador();
+  }
+
+  sumar(item: CarritoItem) {
+    this.inventario.sumarCantidad(item);
+    this.carrito = this.inventario.obtenerCarrito();
+    this.actualizarContador();
+  }
+
+  restar(item: CarritoItem) {
+    this.inventario.restarCantidad(item);
+    this.carrito = this.inventario.obtenerCarrito();
+    this.actualizarContador();
+  }
+
+  irACarrito() {
+    this.router.navigate(['/carrito']);
+  }
+
+  regresar(): void {
+    this.location.back();
+  }
+}

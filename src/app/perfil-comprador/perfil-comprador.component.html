@@ -1,36 +1,45 @@
 <div class="comprador-container">
+
+  <!-- HEADER -->
   <header class="header">
     <h1>AGROMARKET</h1>
   </header>
 
   <main class="main-content">
+
+    <!-- SECCIÓN PRODUCTOS -->
     <section class="productos-section">
       <div class="form-container">
         
+        <!-- REGRESAR + TÍTULO -->
         <div class="comprador-regresar">
-        <button class="btn-regresar" (click)="regresar()">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png"
-            alt="icono agricultor"
-            class="icono"
-          />
+          <button class="btn-regresar" (click)="regresar()">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png"
+              alt="volver"
+            />
           </button>
-        <h2>COMPRADOR</h2>
-      </div>
+          <h2>COMPRADOR</h2>
+        </div>
 
-      <div class="productos-container">
-
-        <div class="producto" *ngFor="let p of productos">
+        <!-- BOTÓN CARRITO FLOTANTE -->
+        <button class="btn-carrito-flotante" (click)="togglePanel()">
           <img
-            [src]="p.imagen"
-            [alt]="p.nombre"
+            src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
+            alt="carrito"
           />
-          <div class="info">
+          <span class="carrito-cantidad">{{ totalItems }}</span>
+        </button>
+
+        <!-- LISTA DE PRODUCTOS -->
+        <div class="productos-container">
+          <div class="producto" *ngFor="let p of productos">
+            <img [src]="p.imagen" [alt]="p.nombre" />
+
+            <div class="info">
               <h3>{{ p.nombre | uppercase }}</h3>
-
-              <p><strong>Cantidad Kg:</strong> {{ p.cantidad }} </p>
-              <p><strong>Precio Kg:</strong> {{ p.precio | currency:'COP' }} </p>
-
+              <p><strong>Cantidad Kg:</strong> {{ p.cantidad }}</p>
+              <p><strong>Precio Kg:</strong> {{ p.precio | currency:'COP' }}</p>
               <p>Tipo: {{ p.tipo }}</p>
 
               <button class="btn"
@@ -39,14 +48,41 @@
                 Agregar al carrito
               </button>
             </div>
-
           </div>
-
         </div>
 
       </div>
     </section>
-    
+
+    <!-- PANEL LATERAL DEL CARRITO -->
+    <div class="panel-compra" [class.panel-abierto]="panelAbierto">
+      <h2>Carrito de compras</h2>
+
+      <div *ngIf="carrito.length === 0">
+        <p>Tu carrito está vacío</p>
+      </div>
+
+      <div *ngFor="let item of carrito" class="carrito-item">
+        <img [src]="item.producto.imagen" alt="img" />
+
+        <div class="info">
+          <h4>{{ item.producto.nombre }}</h4>
+          <p>{{ item.producto.precio | currency:'COP' }}</p>
+
+          <div class="controles">
+            <button (click)="restar(item)">-</button>
+            <span>{{ item.cantidad }}</span>
+            <button (click)="sumar(item)">+</button>
+          </div>
+
+          <p>Subtotal: {{ item.producto.precio * item.cantidad | currency:'COP' }}</p>
+        </div>
+      </div>
+
+      <div class="total-box">
+        <h3>Total: {{ obtenerTotal() | currency:'COP' }}</h3>
+      </div>
+    </div>
 
   </main>
 
