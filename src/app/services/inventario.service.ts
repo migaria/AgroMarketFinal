@@ -99,6 +99,7 @@ export class InventarioService {
     return this.productos;
   }
 
+  // ====== FALTABA ESTA FUNCIÓN ======
   existeProducto(id: number): boolean {
     return this.productos.some(p => p.id === id);
   }
@@ -177,6 +178,24 @@ export class InventarioService {
 
   actualizarCarrito(carritoActualizado: CarritoItem[]) {
     this.carrito = carritoActualizado;
+    this.guardarCarrito();
+  }
+
+  // ====== NUEVO: ELIMINAR PRODUCTO COMPLETO DEL CARRITO ======
+  eliminarProductoDelCarrito(productoId: number) {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const item = this.carrito.find(i => i.producto.id === productoId);
+    if (!item) return;
+
+    const producto = this.productos.find(p => p.id === productoId);
+    if (producto) {
+      producto.cantidad += item.cantidad;
+    }
+
+    this.carrito = this.carrito.filter(i => i.producto.id !== productoId);
+
+    this.guardarInventario();
     this.guardarCarrito();
   }
 }

@@ -1,37 +1,26 @@
 <div class="comprador-container">
 
-  <!-- HEADER -->
   <header class="header">
     <h1>AGROMARKET</h1>
   </header>
 
   <main class="main-content">
 
-    <!-- SECCIÓN PRODUCTOS -->
     <section class="productos-section">
       <div class="form-container">
         
-        <!-- REGRESAR + TÍTULO -->
         <div class="comprador-regresar">
           <button class="btn-regresar" (click)="regresar()">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png"
-              alt="volver"
-            />
+            <img src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png" alt="volver" />
           </button>
           <h2>COMPRADOR</h2>
         </div>
 
-        <!-- BOTÓN CARRITO FLOTANTE -->
         <button class="btn-carrito-flotante" (click)="togglePanel()">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
-            alt="carrito"
-          />
+          <img src="https://cdn-icons-png.flaticon.com/512/107/107831.png" alt="carrito" />
           <span class="carrito-cantidad">{{ totalItems }}</span>
         </button>
 
-        <!-- LISTA DE PRODUCTOS -->
         <div class="productos-container">
           <div class="producto" *ngFor="let p of productos">
             <img [src]="p.imagen" [alt]="p.nombre" />
@@ -54,7 +43,6 @@
       </div>
     </section>
 
-    <!-- PANEL LATERAL DEL CARRITO -->
     <div class="panel-compra" [class.panel-abierto]="panelAbierto">
       <h2>Carrito de compras</h2>
 
@@ -63,6 +51,7 @@
       </div>
 
       <div *ngFor="let item of carrito" class="carrito-item">
+
         <img [src]="item.producto.imagen" alt="img" />
 
         <div class="info">
@@ -73,6 +62,9 @@
             <button (click)="restar(item)">-</button>
             <span>{{ item.cantidad }}</span>
             <button (click)="sumar(item)">+</button>
+
+            <!-- EL BOTÓN ELIMINAR -->
+            <button class="btn-eliminar" (click)="eliminar(item)">🗑️</button>
           </div>
 
           <p>Subtotal: {{ item.producto.precio * item.cantidad | currency:'COP' }}</p>
@@ -83,7 +75,6 @@
         <h3>Total: {{ obtenerTotal() | currency:'COP' }}</h3>
       </div>
     </div>
-
   </main>
 
 </div>

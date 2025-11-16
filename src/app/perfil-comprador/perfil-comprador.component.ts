@@ -31,12 +31,10 @@ export class PerfilCompradorComponent {
     this.actualizarContador();
   }
 
-  // Abrir / Cerrar panel carrito
   togglePanel() {
     this.panelAbierto = !this.panelAbierto;
   }
 
-  // Contar items
   obtenerTotalItems(): number {
     return this.carrito.reduce((acc, item) => acc + item.cantidad, 0);
   }
@@ -45,7 +43,6 @@ export class PerfilCompradorComponent {
     this.totalItems = this.obtenerTotalItems();
   }
 
-  // Carrito
   agregarAlCarrito(producto: Producto) {
     this.inventario.agregarAlCarrito(producto);
     this.carrito = this.inventario.obtenerCarrito();
@@ -64,7 +61,12 @@ export class PerfilCompradorComponent {
     this.actualizarContador();
   }
 
-  // CALCULAR TOTAL DEL CARRITO (AQUÍ ESTÁ LO QUE TE FALTABA)
+  eliminar(item: CarritoItem) {
+    this.inventario.eliminarProductoDelCarrito(item.producto.id);
+    this.carrito = this.inventario.obtenerCarrito();
+    this.actualizarContador();
+  }
+
   obtenerTotal(): number {
     return this.carrito.reduce(
       (total, item) => total + item.cantidad * item.producto.precio,

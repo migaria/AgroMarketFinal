@@ -1,77 +1,76 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { InventarioService, Producto, CarritoItem } from '../services/inventario.service';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-perfil-comprador',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './perfil-comprador.component.html',
-  styleUrls: ['./perfil-comprador.component.css']
+export interface CarritoItem {
+  producto: any;
+  cantidad: number;
+}
+
+@Injectable({
+  providedIn: 'root'
 })
-export class PerfilCompradorComponent {
+export class InventarioService {
 
-  productos: Producto[] = [];
-  carrito: CarritoItem[] = [];
+  private productos = [
+    { id: 1, nombre: 'Tomate', precio: 2000, imagen: 'assets/tomate.jpg' },
+    { id: 2, nombre: 'Papa', precio: 1500, imagen: 'assets/papa.jpg' },
+    { id: 3, nombre: 'Cebolla', precio: 3000, imagen: 'assets/cebolla.jpg' }
+  ];
 
-  panelAbierto: boolean = false;   // ⬅ Necesario
-  totalItems: number = 0;          // ⬅ Para el ícono del carrito
+  private carrito: CarritoItem[] = [];
 
-  constructor(
-    private inventario: InventarioService,
-    private router: Router,
-    private location: Location
-  ) {}
+  constructor() {}
 
-  ngOnInit() {
-    this.productos = this.inventario.obtenerProductos();
-    this.carrito = this.inventario.obtenerCarrito();
-    this.actualizarContador();
+  // Obtener productos
+  obtenerProductos() {
+    return this.productos;
   }
 
-  // ==========================
-  //      PANEL LATERAL
-  // ==========================
-  togglePanel() {
-    this.panelAbierto = !this.panelAbierto;
+  // Obtener el carrito
+  obtenerCarrito() {
+    return this.carrito;
   }
 
-  obtenerTotalItems(): number {
-    return this.carrito.reduce((acc, item) => acc + item.cantidad, 0);
+  // AGREGAR producto al carrito
+  agregarAlCarrito(producto: any) {
+    const existe = this.carrito.find(i => i.producto.id === producto.id);
+
+    if (existe) {
+      existe.cantidad++;
+    } else {
+      this.carrito.push({ producto, cantidad: 1 });
+    }
   }
 
-  actualizarContador() {
-    this.totalItems = this.obtenerTotalItems();
+  // SUMAR cantidad
+  sumar(id: number) {
+    const item = this.carrito.find(i => i.producto.id === id);
+    if (item) item.cantidad++;
   }
 
-  // ==========================
-  //      CARRITO
-  // ==========================
-  agregarAlCarrito(producto: Producto) {
-    this.inventario.agregarAlCarrito(producto);
-    this.carrito = this.inventario.obtenerCarrito();
-    this.actualizarContador();
+  // RESTAR cantidad
+  restar(id: number) {
+    const item = this.carrito.find(i => i.producto.id === id);
+    if (item) {
+      item.cantidad--;
+      if (item.cantidad <= 0) {
+        this.eliminar(id);
+      }
+    }
   }
 
-  sumar(item: CarritoItem) {
-    this.inventario.sumarCantidad(item);
-    this.carrito = this.inventario.obtenerCarrito();
-    this.actualizarContador();
+  // ELIMINAR del carrito
+  eliminar(id: number) {
+    this.carrito = this.carrito.filter(i => i.producto.id !== id);
   }
 
-  restar(item: CarritoItem) {
-    this.inventario.restarCantidad(item);
-    this.carrito = this.inventario.obtenerCarrito();
-    this.actualizarContador();
+  // TOTAL general
+  obtenerTotal() {
+    return this.carrito.reduce((t, i) => t + i.producto.precio * i.cantidad, 0);
   }
 
-  irACarrito() {
-    this.router.navigate(['/carrito']);
-  }
-
-  regresar(): void {
-    this.location.back();
+  // CANTIDAD total para el contador
+  obtenerCantidadTotal() {
+    return this.carrito.reduce((t, i) => t + i.cantidad, 0);
   }
 }
+
