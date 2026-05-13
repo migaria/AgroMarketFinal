@@ -1,0 +1,374 @@
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+:host {
+  background-color:  #b8db97;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.agregar-producto-container {
+  width: 100%;
+}
+
+.header {
+  background-color: #0a7d0c;
+  width: 100%;
+  text-align: center;
+  padding: 40px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.header h1 {
+  color: #b7e46a;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.contenedor-icono-verprod {
+  position: absolute;
+  top: 40px;
+  right: 39px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-ver-productos {
+  background-color: #2d7a22;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.btn-ver-productos img {
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-ver-productos:hover {
+  transform: scale(1.08);
+  background-color: #2f8523;
+}
+
+.texto-verprod {
+  position: absolute;
+  bottom: -20px;
+  font-size: 15px;
+  color: rgb(8, 8, 8);
+  font-weight: bold;
+}
+
+.main-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.titulo-con-botones {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 25px;
+  margin-top: 20px;
+  margin-left: -80px;
+}
+
+.titulo-con-botones h2 {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: #004d26;
+  margin: 0;
+  margin-left: -200px;
+  position: relative;
+  z-index: 10;
+}
+
+.btn-regresar {
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 2px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  position: relative;
+  z-index: 9999 !important;
+  pointer-events: auto;
+}
+
+.btn-regresar img {
+  width: 35px;
+  height: 35px;
+}
+
+.btn-regresar:hover {
+  background-color: #84c46f;
+  transform: scale(1.05);
+}
+
+.panel-productos {
+  position: fixed;
+  right: -300px;
+  top: 170px;
+  width: 150px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background-color: #f3f7f1;
+  padding: 5px;
+  border-radius: 1px 0 0 15px;
+  border-left: 4px solid #7ab463;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 999;
+}
+
+.panel-productos.panel-abierto {
+  right: 0;
+}
+
+.producto-item {
+  border-bottom: 2px solid #7ab463;
+}
+
+.producto-item:last-child {
+  border-bottom: none;
+}
+
+.form-section {
+  flex: 1;
+  background-color: #bbe694;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1px;
+  padding-bottom: 250px;
+  overflow: visible;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 470px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  font-size: 20px;
+  color: #005020;
+  margin-bottom: 10px;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 370px;
+  box-sizing: border-box;
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid #0a6a35;
+  outline: none;
+}
+
+.botones {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+button {
+  background-color: #8ccf73;
+  border: none;
+  padding: 9px 32px;
+  border-radius: 40px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background-color: #79ba62;
+}
+
+.imagen-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 450px;
+  overflow: hidden;
+  margin-top: -120px;
+}
+
+.imagen-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.imagen-container img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 50, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.preview {
+  margin-top: -100px;
+  margin-right: 105px;
+  text-align: right;
+}
+
+.preview-img {
+  max-width: 100px;
+  border-radius: 8px;
+  margin-top: 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+input[type="file"] {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 8px;
+  width: auto;
+}
+
+.mensaje-exito {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.error {
+  color: rgb(10, 10, 10);
+  font-size: 0.9em;
+}
+
+
+@media (max-width: 900px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .imagen-section {
+    height: 300px;
+  }
+
+  .botones {
+    justify-content: center;
+  }
+
+  .preview {
+    margin: 10px auto;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .titulo-con-botones {
+    padding: 0 10px;
+  }
+
+  .btn-regresar img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .titulo-con-botones h2 {
+    font-size: 20px;
+  }
+}
+
+.panel-agricultor {
+  background:  #bbe694;
+  padding: 35px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  border: 1px solid #bbe694;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+}
+
+.panel-agricultor.panel-abierto {
+  max-height: 600px;
+  padding: 20px;
+}
+
+.titulo-panel {
+  margin-bottom: 11px;
+  font-size: 18px;
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+}
+
+.producto-item-agricultor {
+  background: #8ccf73;
+  padding: 5px;
+  border-radius: 20px;
+  border-left: 7px solid #0a7d0c;
+  margin-bottom: 20px;
+  box-shadow: 0 20px 20px rgba(0,0,0,0.05);
+}
+
+.sin-productos {
+  text-align: center;
+  color: #777;
+  padding: 10px;
+}
+
+.panel-agricultor {
+  max-height: 450px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #8ccf73 #eaeaea;
+}
+
+.panel-agricultor::-webkit-scrollbar {
+  width: 8px;
+}
+
+.panel-agricultor::-webkit-scrollbar-track {
+  background: #eaeaea;
+  border-radius: 10px;
+}
+
+.panel-agricultor::-webkit-scrollbar-thumb {
+  background: #2f6f30;
+  border-radius: 10px;
+}
