@@ -1,0 +1,155 @@
+* {
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.perfil-container {
+  background-color: #b8db97;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfil-header {
+  background-color: #09730a;
+  width: 100%;
+  text-align: center;
+  padding: 40px 0;       
+}
+
+.perfil-header h1 {
+  color: #a2d34e;
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.perfil-cerrarsesion {
+  position: absolute;
+  top: 50px;       
+  right: 50px;    
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-regresar {
+  background-color: #24641a;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-regresar:hover {
+  transform: scale(1.08);
+}
+.btn-texto {
+  position: absolute;
+  bottom: -20px;  
+  font-size: 15px;
+  color: rgb(8, 8, 8);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+
+.icono {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icono:hover {
+  transform: scale(1.1);
+}
+
+.perfil-main {
+  padding: 1px 1px;
+  text-align: center;
+  width: 100%;
+  max-width: 1500px;
+}
+
+.perfil-main h2 {
+  color: #1d4728;
+  font-size: 1.7rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-left: -340px;
+}
+
+.perfil-contenedor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+}
+
+.perfil-opcion {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  max-width: 750px;
+  gap: 15px;
+}
+
+.perfil-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-perfil {
+  background-color: transparent;
+  border: 2px solid #1d4728;
+  border-radius: 10px;
+  padding: 15px 80px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #1d4728;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-perfil:hover {
+  background-color: #1d4728;
+  color: #fff;
+}
+
+.img-perfil {
+  width: 310px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+@media (max-width: 768px) {
+  .perfil-opcion {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .perfil-info {
+    justify-content: center;
+  }
+
+  .img-perfil {
+    width: 90%;
+    height: auto;
+  }
+
+  .btn-perfil {
+    padding: 12px 40px;
+  }
+}

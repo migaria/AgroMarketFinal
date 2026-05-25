@@ -1,0 +1,87 @@
+<div class="contenedor-formulario">
+  <header class="encabezado">
+    <h1>AGROMARKET</h1>
+  </header>
+  <div class="registrar-regresar">
+    <button class="btn-regresar" (click)="regresar()">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png"
+        alt="icono agricultor"
+        class="icono"
+      />
+    </button>
+    <h2>CREAR CUENTA</h2>
+  </div>
+
+  <div class="contenido">
+    <form class="formulario" (ngSubmit)="registrar()" #formRegistro="ngForm">
+
+      <label for="nombre">Nombre Completo</label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        placeholder="Ingresa tu nombre"
+        [(ngModel)]="usuario.nombre"
+        (input)="validarNombre($event)"
+        required
+        maxlength="60"
+      />
+
+      <label for="correo">Correo</label>
+      <input
+        type="email"
+        id="correo"
+        name="correo"
+        placeholder="correo@gmail.com"
+        [(ngModel)]="usuario.correo"
+        required
+        maxlength="30"
+      />
+
+      <label for="telefono">Teléfono</label>
+      <input
+        type="tel"
+        id="telefono"
+        name="telefono"
+        placeholder="Número de teléfono"
+        [(ngModel)]="usuario.telefono"
+        (input)="validarTelefono($event)"
+        required
+        maxlength="12"
+      />
+
+      <label for="password">password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Debe tener al menos 8 caracteres, letras y números"
+        [(ngModel)]="usuario.password"
+        required
+        maxlength="20"
+        minlength="8"
+        maxlength="20"
+        pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
+      />
+
+      <label for="confirmar">Confirmar password</label>
+      <input
+        type="password"
+        id="confirmar"
+        name="confirmar"
+        placeholder="Confirmar password"
+        [(ngModel)]="usuario.confirmar"
+        required
+        maxlength="20"
+      />
+
+      <div class="botones">
+        <button type="submit" class="crear">Crear</button>
+        <button type="button" class="cancelar" (click)="cancelar()">Cancelar</button>
+
+      </div>
+       <p class="mensaje-exito" *ngIf="mensajeExito">{{ mensajeExito }}</p>
+    </form>
+  </div>
+</div>

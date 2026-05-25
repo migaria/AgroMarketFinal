@@ -1,0 +1,44 @@
+<div class="hero-container">
+
+  <img 
+    src="https://colombia.travel/sites/default/files/INTERNA_640X480_1_15.jpg" 
+    alt="Fondo" 
+    class="hero-bg"
+  />
+
+  <header class="header">
+      <div></div>
+    <h1>AGROMARKET</h1>
+    <button class="btn-iniciar" routerLink="/login">
+  <img 
+    src="https://cdn-icons-png.flaticon.com/512/8801/8801434.png"
+    alt="icono iniciar sesión"
+    class="icono"
+  />
+  <span class="btn-texto">Iniciar</span>
+</button>
+  </header>
+
+  <nav class="menu">
+  <button class="btn" (click)="mostrar('inicio  ')">Inicio</button>
+  <button class="btn" (click)="mostrar('nosotros')">Nosotros</button>
+  <button class="btn" (click)="mostrar('servicios')">Servicios</button>
+  </nav>
+
+ <div class="pagina-contenido" *ngIf="seccion === 'inicio'">
+  <h1 class="pagina-titulo">Bienvenidos</h1>
+  <p>Descubre la conexión entre la ciudad y el campo.</p>
+  <p>Compra directo al agricultor, sin intermediarios.</p>
+</div>
+
+<div class="pagina-contenido" *ngIf="seccion === 'nosotros'">
+  <h1 class="pagina-titulo">Nosotros</h1>
+  <p>Somos una plataforma que une agricultores y compradores.</p>
+  <p>Garantizamos calidad y frescura en todos los productos.</p>
+</div>
+
+<div class="pagina-contenido" *ngIf="seccion === 'servicios'">
+  <h1 class="pagina-titulo">Servicios</h1>
+  <p>Venta directa, logística y distribución eficiente.</p>
+  <p>Apoyo tecnológico para productores.</p>
+</div>

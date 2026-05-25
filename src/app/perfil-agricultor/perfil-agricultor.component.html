@@ -1,0 +1,343 @@
+<div class="agregar-producto-container">
+
+  <header class="header">
+
+    <h1>AGROMARKET</h1>
+
+    <div
+      class="contenedor-icono-verprod"
+      (click)="mostrar = !mostrar"
+    >
+
+      <button class="btn-ver-productos">
+
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
+          alt="productos"
+        />
+
+      </button>
+
+      <span class="texto-verprod">
+        Productos
+      </span>
+
+    </div>
+
+  </header>
+
+  <main class="main-content">
+
+
+
+    <section
+      class="form-section"
+      [class.form-editando]="editando"
+    >
+
+      <div class="form-container">
+
+        <div class="titulo-con-botones">
+
+          <button
+            class="btn-regresar"
+            (click)="regresar()"
+          >
+
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/6097/6097933.png"
+              alt="volver"
+              class="icono"
+            />
+
+          </button>
+
+          <h2>
+
+            {{
+              editando
+              ? 'EDITANDO PRODUCTO'
+              : 'AGRICULTOR'
+            }}
+
+          </h2>
+
+        </div>
+
+     
+
+        <div class="form-group">
+
+          <label for="nombre">
+            Nombre producto
+          </label>
+
+          <input
+            type="text"
+            id="nombre"
+            maxlength="30"
+            required
+            (input)="soloLetras($event)"
+            [(ngModel)]="nombre"
+            name="nombre"
+          />
+
+        </div>
+
+   
+
+        <div class="form-group">
+
+          <label for="cantidad">
+            Cantidad Kg
+          </label>
+
+          <input
+            type="text"
+            id="cantidad"
+            maxlength="5"
+            required
+            (input)="soloNumeros($event)"
+            [(ngModel)]="cantidad"
+            name="cantidad"
+          />
+
+        </div>
+
+   
+
+        <div class="form-group">
+
+          <label for="precio">
+            Precio Kg
+          </label>
+
+          <input
+            type="text"
+            id="precio"
+            maxlength="10"
+            required
+            (input)="soloDecimales($event)"
+            [(ngModel)]="precio"
+            name="precio"
+          />
+
+        </div>
+
+        
+
+        <div class="form-group">
+
+          <label for="tipo">
+            Tipo
+          </label>
+
+          <select
+            id="tipo"
+            [(ngModel)]="tipo"
+            name="tipo"
+          >
+
+            <option value="">
+              Seleccionar...
+            </option>
+
+            <option value="grano">
+              Grano
+            </option>
+
+            <option value="tuberculo">
+              Tubérculo
+            </option>
+
+            <option value="fruta">
+              Fruta
+            </option>
+
+            <option value="hortaliza">
+              Hortaliza
+            </option>
+
+            <option value="otros">
+              Otros
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="imagen">
+            Cargar imagen
+          </label>
+
+          <input
+            type="file"
+            id="imagen"
+            accept="image/*"
+            (change)="onFileSelected($event)"
+          />
+
+        </div>
+
+       
+
+        <div
+          class="preview"
+          *ngIf="imagenPreview"
+        >
+
+          <img
+            [src]="imagenPreview"
+            alt="preview"
+            class="preview-img"
+          />
+
+        </div>
+
+       
+
+        <div class="botones">
+
+          <button
+            type="button"
+            class="guardar"
+            (click)="guardar()"
+          >
+
+            {{
+              editando
+              ? 'Actualizar Producto'
+              : 'Guardar'
+            }}
+
+          </button>
+
+          <button
+            type="button"
+            class="cancelar"
+            (click)="cancelar()"
+          >
+
+            Cancelar
+
+          </button>
+
+        </div>
+
+
+        <p
+          class="mensaje-exito"
+          *ngIf="mensajeExito"
+        >
+
+          {{ mensajeExito }}
+
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <section
+      class="productos-derecha"
+      *ngIf="mostrar"
+    >
+
+      <div class="panel-derecha-container">
+
+        <h2 class="titulo-panel-derecha">
+          Mis Productos
+        </h2>
+
+        <div
+          *ngIf="productos.length === 0"
+          class="sin-productos"
+        >
+
+          No hay productos todavía
+
+        </div>
+
+        <div
+          class="producto-item-agricultor"
+          *ngFor="let p of productos"
+        >
+
+          <img
+            [src]="p.imagen"
+            alt="producto"
+            class="img-producto"
+          />
+
+          <h3>
+            {{ p.nombre }}
+          </h3>
+
+          <p>
+            <strong>Cantidad:</strong>
+            {{ p.cantidad }} Kg
+          </p>
+
+          <p>
+            <strong>Precio:</strong>
+            {{ p.precio | currency:'COP' }}
+          </p>
+
+          <p>
+            <strong>Tipo:</strong>
+            {{ p.tipo }}
+          </p>
+
+          <div class="acciones-producto">
+
+            <button
+              class="btn-editar"
+              (click)="editarProducto(p)"
+            >
+
+              Actualizar
+
+            </button>
+
+            <button
+              class="btn-eliminar"
+              (click)="eliminarProducto(p.id!)"
+            >
+
+              Eliminar
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+   
+
+    <section
+      class="imagen-section"
+      *ngIf="!mostrar && !editando"
+    >
+
+      <div class="imagen-container">
+
+        <img
+          src="https://www.cocinaconalegria.com/wp-content/uploads/2022/05/que-son-los-productos-organicos.jpg"
+          alt="imagen"
+        />
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
