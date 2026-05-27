@@ -1,5 +1,7 @@
 <div class="agregar-producto-container">
 
+  <!-- HEADER -->
+
   <header class="header">
 
     <h1>AGROMARKET</h1>
@@ -26,6 +28,8 @@
 
   </header>
 
+  <!-- MAIN -->
+
   <main class="main-content">
 
     <!-- FORMULARIO -->
@@ -36,6 +40,8 @@
     >
 
       <div class="form-container">
+
+        <!-- TITULO -->
 
         <div class="titulo-con-botones">
 
@@ -52,13 +58,21 @@
 
           </button>
 
-          <h2>
-            {{
-              editando
-              ? 'EDITANDO PRODUCTO'
-              : 'AGRICULTOR'
-            }}
-          </h2>
+          <div>
+
+            <h2>
+              {{
+                editando
+                ? 'EDITANDO PRODUCTO'
+                : 'PANEL DEL AGRICULTOR'
+              }}
+            </h2>
+
+            <p class="subtitulo-form">
+              Publica tus cosechas y conecta con compradores mayoristas.
+            </p>
+
+          </div>
 
         </div>
 
@@ -75,6 +89,7 @@
             id="nombre"
             maxlength="30"
             required
+            placeholder="Ej: Papa criolla"
             (input)="soloLetras($event)"
             [(ngModel)]="nombre"
             name="nombre"
@@ -87,7 +102,7 @@
         <div class="form-group">
 
           <label for="cantidad">
-            Cantidad Kg
+            Cantidad en Kg
           </label>
 
           <input
@@ -95,6 +110,7 @@
             id="cantidad"
             maxlength="5"
             required
+            placeholder="Ej: 500"
             (input)="soloNumeros($event)"
             [(ngModel)]="stock"
             name="cantidad"
@@ -107,7 +123,7 @@
         <div class="form-group">
 
           <label for="precio">
-            Precio Kg
+            Precio por Kg
           </label>
 
           <input
@@ -115,6 +131,7 @@
             id="precio"
             maxlength="10"
             required
+            placeholder="Ej: 2500"
             (input)="soloDecimales($event)"
             [(ngModel)]="precio"
             name="precio"
@@ -209,7 +226,7 @@
             {{
               editando
               ? 'Actualizar Producto'
-              : 'Guardar'
+              : 'Guardar Producto'
             }}
 
           </button>
@@ -263,6 +280,8 @@
 
         </div>
 
+        <!-- PRODUCTOS -->
+
         <div
           class="producto-item-agricultor"
           *ngFor="let p of productos"
@@ -292,6 +311,8 @@
             <strong>Categoría:</strong>
             {{ p.categoria }}
           </p>
+
+          <!-- BOTONES -->
 
           <div class="acciones-producto">
 

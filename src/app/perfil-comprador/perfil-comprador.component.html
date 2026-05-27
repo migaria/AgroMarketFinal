@@ -1,14 +1,38 @@
 <div class="comprador-container">
 
+  <!-- HEADER -->
+
   <header class="header">
+
     <h1>AGROMARKET</h1>
+
+    <button
+      class="btn-carrito-flotante"
+      (click)="togglePanel()"
+    >
+
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
+        alt="carrito"
+      />
+
+      <span class="carrito-cantidad">
+        {{ totalItems }}
+      </span>
+
+    </button>
+
   </header>
+
+  <!-- MAIN -->
 
   <main class="main-content">
 
     <section class="productos-section">
 
       <div class="form-container">
+
+        <!-- TITULO -->
 
         <div class="comprador-regresar">
 
@@ -24,25 +48,19 @@
 
           </button>
 
-          <h2>COMPRADOR</h2>
+          <div>
+
+            <h2>COMPRADOR</h2>
+
+            <p class="subtitulo">
+              Explora productos agrícolas frescos directamente del campo.
+            </p>
+
+          </div>
 
         </div>
 
-        <button
-          class="btn-carrito-flotante"
-          (click)="togglePanel()"
-        >
-
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/107/107831.png"
-            alt="carrito"
-          />
-
-          <span class="carrito-cantidad">
-            {{ totalItems }}
-          </span>
-
-        </button>
+        <!-- PRODUCTOS -->
 
         <div class="productos-container">
 
@@ -63,17 +81,17 @@
               </h3>
 
               <p>
-                <strong>Cantidad Kg:</strong>
-                {{ p.stock }}
+                <strong>Cantidad:</strong>
+                {{ p.stock }} Kg
               </p>
 
               <p>
-                <strong>Precio Kg:</strong>
+                <strong>Precio:</strong>
                 {{ p.precio | currency:'COP' }}
               </p>
 
               <p>
-                Categoría:
+                <strong>Categoría:</strong>
                 {{ p.categoria }}
               </p>
 
@@ -97,16 +115,37 @@
 
     </section>
 
+    <!-- PANEL CARRITO -->
+
     <div
       class="panel-compra"
       [class.panel-abierto]="panelAbierto"
     >
 
+      <!-- BOTON CERRAR -->
+
+      <button
+        class="btn-cerrar-carrito"
+        (click)="togglePanel()"
+      >
+
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
+          alt="cerrar"
+        />
+
+        Cerrar carrito
+
+      </button>
+
       <h2>
         Carrito de compras
       </h2>
 
-      <div *ngIf="carrito.length === 0">
+      <div
+        *ngIf="carrito.length === 0"
+        class="carrito-vacio"
+      >
 
         <p>
           Tu carrito está vacío
@@ -158,18 +197,18 @@
 
             </button>
 
-            <button
-              class="btn-eliminar"
-              (click)="eliminar(item)"
-            >
-
-              Eliminar
-
-            </button>
-
           </div>
 
-          <p>
+          <button
+            class="btn-eliminar"
+            (click)="eliminar(item)"
+          >
+
+            Eliminar
+
+          </button>
+
+          <p class="subtotal">
 
             Subtotal:
 
@@ -185,6 +224,8 @@
 
       </div>
 
+      <!-- TOTAL -->
+
       <div class="total-box">
 
         <h1>
@@ -193,7 +234,7 @@
 
           {{
             obtenerTotal()
-            | currency:'COP'
+            | currency:''
           }}
 
         </h1>

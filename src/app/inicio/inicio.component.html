@@ -1,44 +1,177 @@
 <div class="hero-container">
 
+  <!-- IMAGEN FONDO -->
+
   <img 
-    src="https://colombia.travel/sites/default/files/INTERNA_640X480_1_15.jpg" 
+    src="https://media.istockphoto.com/id/614135450/photo/two-farmers-working-together-in-polyethylene-tunnel.jpg?s=2048x2048&w=is&k=20&c=p50O_XYDrUDmaGCzSbsgeU1sLIVXo56-Rjs1xE8VMDc=" 
     alt="Fondo" 
     class="hero-bg"
   />
 
+  <!-- OVERLAY -->
+
+  <div class="overlay"></div>
+
+  <!-- HEADER -->
+
   <header class="header">
-      <div></div>
-    <h1>AGROMARKET</h1>
-    <button class="btn-iniciar" routerLink="/login">
-  <img 
-    src="https://cdn-icons-png.flaticon.com/512/8801/8801434.png"
-    alt="icono iniciar sesión"
-    class="icono"
-  />
-  <span class="btn-texto">Iniciar</span>
-</button>
+
+    <div class="logo-container">
+
+      <h1>AGROMARKET</h1>
+
+    </div>
+
+    <button
+      class="btn-iniciar"
+      routerLink="/login"
+    >
+
+      <img 
+        src="https://cdn-icons-png.flaticon.com/512/8801/8801434.png"
+        alt="icono iniciar sesión"
+      />
+
+      <span class="btn-texto">
+        Iniciar
+      </span>
+
+    </button>
+
   </header>
 
+  <!-- MENU -->
+
   <nav class="menu">
-  <button class="btn" (click)="mostrar('inicio  ')">Inicio</button>
-  <button class="btn" (click)="mostrar('nosotros')">Nosotros</button>
-  <button class="btn" (click)="mostrar('servicios')">Servicios</button>
+
+    <button
+      class="btn"
+      (click)="mostrar('inicio')"
+    >
+
+      Inicio
+
+    </button>
+
+    <button
+      class="btn"
+      (click)="mostrar('nosotros')"
+    >
+
+      Nosotros
+
+    </button>
+
+    <button
+      class="btn"
+      (click)="mostrar('servicios')"
+    >
+
+      Servicios
+
+    </button>
+
   </nav>
 
- <div class="pagina-contenido" *ngIf="seccion === 'inicio'">
-  <h1 class="pagina-titulo">Bienvenidos</h1>
-  <p>Descubre la conexión entre la ciudad y el campo.</p>
-  <p>Compra directo al agricultor, sin intermediarios.</p>
-</div>
+  <!-- CONTENIDO -->
 
-<div class="pagina-contenido" *ngIf="seccion === 'nosotros'">
-  <h1 class="pagina-titulo">Nosotros</h1>
-  <p>Somos una plataforma que une agricultores y compradores.</p>
-  <p>Garantizamos calidad y frescura en todos los productos.</p>
-</div>
+  <div
+    class="pagina-contenido"
+    *ngIf="seccion === 'inicio'"
+  >
 
-<div class="pagina-contenido" *ngIf="seccion === 'servicios'">
-  <h1 class="pagina-titulo">Servicios</h1>
-  <p>Venta directa, logística y distribución eficiente.</p>
-  <p>Apoyo tecnológico para productores.</p>
+    <h1 class="pagina-titulo">
+      Conectamos el campo con la ciudad
+    </h1>
+
+    <p>
+      Compra productos agrícolas frescos directamente del agricultor.
+    </p>
+
+    <p>
+      Venta al por mayor sin intermediarios.
+    </p>
+
+    <button class="btn-explorar">
+
+      Explorar productos
+
+    </button>
+
+  </div>
+
+  <!-- NOSOTROS -->
+
+  <div
+    class="pagina-contenido"
+    *ngIf="seccion === 'nosotros'"
+  >
+
+    <h1 class="pagina-titulo">
+      Nosotros
+    </h1>
+
+    <p>
+      Somos una plataforma que conecta agricultores con comerciantes.
+    </p>
+
+    <p>
+      Facilitamos la venta directa y apoyamos el crecimiento rural.
+    </p>
+
+  </div>
+
+  <!-- SERVICIOS -->
+
+  <div
+    class="pagina-contenido"
+    *ngIf="seccion === 'servicios'"
+  >
+
+    <h1 class="pagina-titulo">
+      Servicios
+    </h1>
+
+    <div class="cards-servicios">
+
+      <div class="card-servicio">
+
+        <h3>
+           Venta directa
+        </h3>
+
+        <p>
+          Compra sin intermediarios.
+        </p>
+
+      </div>
+
+      <div class="card-servicio">
+
+        <h3>
+           Distribución
+        </h3>
+
+        <p>
+          Venta al por mayor para negocios.
+        </p>
+
+      </div>
+
+      <div class="card-servicio">
+
+        <h3>
+           Compra segura
+        </h3>
+
+        <p>
+          Gestión rápida y confiable.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
