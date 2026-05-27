@@ -2,23 +2,24 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-login',
-  standalone: true,     
+  standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
   correo = '';
   password = '';
 
- constructor(
-  private router: Router,
-  
+  constructor(
+    private router: Router,
+    private usuarioService: UsuarioService
   ) {}
-  ngOnInit() {}
 
   irARegistrar() {
     this.router.navigate(['/registrar']);
@@ -26,28 +27,38 @@ export class LoginComponent {
 
   recuperarContrasena(event: Event) {
     event.preventDefault();
-    alert(' Revisa tu correo para restablecer tu contraseña.');
+    alert('Revisa tu correo');
   }
 
   iniciarSesion() {
-    const usuarioGuardado = localStorage.getItem('usuarioRegistrado');
 
-    if (usuarioGuardado) {
-      const usuario = JSON.parse(usuarioGuardado);
+    const usuario = {
+      correo: this.correo,
+      password: this.password
+    };
 
-      if (this.correo === usuario.correo && this.password === usuario.password) {
-        alert('Inicio de sesión exitoso');
+    this.usuarioService.login(usuario)
+      .subscribe({
+        next: (respuesta) => {
 
-        localStorage.setItem('usuarioActivo', JSON.stringify(usuario));
+          if (respuesta === 'COMPRADOR') {
+            alert('Bienvenido Comprador');
+            this.router.navigate(['/comprador']);
+          } else if (respuesta === 'VENDEDOR') {
+            alert('Bienvenido Agricultor');
+            this.router.navigate(['/agricultor'])
+          } else{
+            alert(respuesta);
+          }
 
-        this.router.navigate(['/perfil']);
-      } else {
-        alert(' Credenciales incorrectas');
-      }
-    }
+        },
+        error: () => {
+          alert('Error de conexión');
+        }
+      });
   }
+
   regresar(): void {
     this.router.navigate(['/inicio']);
   }
-
 }

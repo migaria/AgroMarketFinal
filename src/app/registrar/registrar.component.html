@@ -76,6 +76,13 @@
         maxlength="20"
       />
 
+      <label>Rol</label>
+      <select [(ngModel)]="usuario.rol" name="rol" required>
+      <option value="">Seleccione un rol</option>
+      <option value="COMPRADOR">Comprador</option>
+      <option value="VENDEDOR">Vendedor</option>
+      </select>
+
       <div class="botones">
         <button type="submit" class="crear">Crear</button>
         <button type="button" class="cancelar" (click)="cancelar()">Cancelar</button>

@@ -23,7 +23,7 @@ export class CarritoComprasComponent {
   ngOnInit() {
     this.carrito = this.inventario.obtenerCarrito();
     this.carrito = this.carrito.filter(item =>
-     this.inventario.existeProducto(item.producto.id)
+   this.inventario.existeProducto(item.producto.id || '')
     );
 
     this.actualizarTotal();

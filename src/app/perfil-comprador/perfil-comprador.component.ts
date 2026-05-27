@@ -16,13 +16,16 @@ import {
   templateUrl: './perfil-comprador.component.html',
   styleUrls: ['./perfil-comprador.component.css']
 })
+
 export class PerfilCompradorComponent {
 
   productos: Producto[] = [];
+
   carrito: CarritoItem[] = [];
 
-  panelAbierto: boolean = false;
-  totalItems: number = 0;
+  panelAbierto = false;
+
+  totalItems = 0;
 
   constructor(
     private inventario: InventarioService,
@@ -32,33 +35,21 @@ export class PerfilCompradorComponent {
 
   ngOnInit() {
 
-    // 🔥 CARGAR PRODUCTOS DESDE EL BACKEND
-    this.cargarProductos();
+    // =========================
+    // CARGAR PRODUCTOS BACKEND
+    // =========================
 
-    // 🔥 CARGAR CARRITO
-    this.carrito =
-      this.inventario.obtenerCarrito();
-
-    this.actualizarContador();
-
-  }
-
-  // =========================================
-  // ========= GET PRODUCTOS BACKEND =========
-  // =========================================
-
-  cargarProductos() {
-
-    this.inventario.getProductos()
+    this.inventario
+      .getProductos()
       .subscribe({
 
-        next: (data) => {
+        next: (data: Producto[]) => {
 
           this.productos = data;
 
         },
 
-        error: (error) => {
+        error: (error: any) => {
 
           console.error(
             'Error cargando productos:',
@@ -69,11 +60,20 @@ export class PerfilCompradorComponent {
 
       });
 
+    // =========================
+    // CARRITO
+    // =========================
+
+    this.carrito =
+      this.inventario.obtenerCarrito();
+
+    this.actualizarContador();
+
   }
 
-  // =========================================
-  // ============= PANEL CARRITO =============
-  // =========================================
+  // =========================
+  // PANEL CARRITO
+  // =========================
 
   togglePanel() {
 
@@ -82,11 +82,16 @@ export class PerfilCompradorComponent {
 
   }
 
+  // =========================
+  // CONTADOR
+  // =========================
+
   obtenerTotalItems(): number {
 
     return this.carrito.reduce(
 
       (acc, item) =>
+
         acc + item.cantidad,
 
       0
@@ -102,11 +107,13 @@ export class PerfilCompradorComponent {
 
   }
 
-  // =========================================
-  // ========= AGREGAR AL CARRITO ============
-  // =========================================
+  // =========================
+  // AGREGAR CARRITO
+  // =========================
 
-  agregarAlCarrito(producto: Producto) {
+  agregarAlCarrito(
+    producto: Producto
+  ) {
 
     this.inventario
       .agregarAlCarrito(producto);
@@ -118,9 +125,9 @@ export class PerfilCompradorComponent {
 
   }
 
-  // =========================================
-  // ========= SUMAR PRODUCTO =================
-  // =========================================
+  // =========================
+  // SUMAR
+  // =========================
 
   sumar(item: CarritoItem) {
 
@@ -134,9 +141,9 @@ export class PerfilCompradorComponent {
 
   }
 
-  // =========================================
-  // ========= RESTAR PRODUCTO ===============
-  // =========================================
+  // =========================
+  // RESTAR
+  // =========================
 
   restar(item: CarritoItem) {
 
@@ -150,15 +157,15 @@ export class PerfilCompradorComponent {
 
   }
 
-  // =========================================
-  // ========= ELIMINAR PRODUCTO =============
-  // =========================================
+  // =========================
+  // ELIMINAR
+  // =========================
 
   eliminar(item: CarritoItem) {
 
     this.inventario
       .eliminarProductoDelCarrito(
-        item.producto.id!
+        item.producto.id || ''
       );
 
     this.carrito =
@@ -168,9 +175,9 @@ export class PerfilCompradorComponent {
 
   }
 
-  // =========================================
-  // =============== TOTAL ===================
-  // =========================================
+  // =========================
+  // TOTAL
+  // =========================
 
   obtenerTotal(): number {
 
@@ -188,9 +195,9 @@ export class PerfilCompradorComponent {
 
   }
 
-  // =========================================
-  // ============== REGRESAR =================
-  // =========================================
+  // =========================
+  // REGRESAR
+  // =========================
 
   regresar() {
 

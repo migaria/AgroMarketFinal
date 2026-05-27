@@ -1,114 +1,91 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {
+  HttpClient
+} from '@angular/common/http';
+
+import {
+  Observable
+} from 'rxjs';
 
 export interface Producto {
+
   id?: string;
+
   nombre: string;
-  cantidad: number;
+
+  categoria: string;
+
   precio: number;
-  tipo: string;
-  imagen?: string;
+
+  stock: number;
+
+  imagen: string;
+
 }
 
 export interface CarritoItem {
+
   producto: Producto;
+
   cantidad: number;
+
 }
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class InventarioService {
 
- 
-  private apiUrl = 'http://localhost:9090/productos';
+  private apiUrl =
+    'http://localhost:9090/productos';
 
- 
-  private productos: Producto[] = [];
   private carrito: CarritoItem[] = [];
 
   constructor(
-    private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+    private http: HttpClient
+  ) {}
 
-    // SOLO CARGA EL CARRITO
-    if (isPlatformBrowser(this.platformId)) {
-      this.cargarCarrito();
-    }
-  }
+  // =========================
+  // PRODUCTOS API
+  // =========================
 
-  // ======================================
-  // ========= PRODUCTOS BACKEND ==========
-  // ======================================
+  getProductos():
+    Observable<Producto[]> {
 
-  
-  getProductos(): Observable<Producto[]> {
-
-    return this.http.get<any[]>(this.apiUrl)
-      .pipe(
-
-        map(productos =>
-
-          productos.map(p => ({
-
-            id: p.id,
-            nombre: p.nombre,
-            cantidad: p.stock,
-            precio: p.precio,
-            tipo: p.categoria,
-            imagen: p.imagen || ''
-
-          }))
-
-        )
-
-      );
-
-  }
-
- 
-  obtenerProductos(): Producto[] {
-
-    return this.productos;
-
-  }
-
- 
-  existeProducto(id: string | undefined): boolean {
-
-    return this.productos.some(
-      p => p.id === id
+    return this.http.get<Producto[]>(
+      this.apiUrl
     );
 
   }
 
-  // POST PRODUCTO
-  agregarProducto(producto: Producto): Observable<any> {
+  agregarProducto(
+    producto: Producto
+  ): Observable<Producto> {
 
-    const productoBackend = {
-
-      nombre: producto.nombre,
-      categoria: producto.tipo,
-      precio: producto.precio,
-      stock: producto.cantidad,
-      imagen: producto.imagen || ''
-
-    };
-
-    return this.http.post(
+    return this.http.post<Producto>(
       this.apiUrl,
-      productoBackend
+      producto
     );
 
   }
 
-  // DELETE PRODUCTO
-  eliminarProducto(id: string): Observable<any> {
+  actualizarProducto(
+    id: string,
+    producto: Producto
+  ): Observable<Producto> {
+
+    return this.http.put<Producto>(
+      `${this.apiUrl}/${id}`,
+      producto
+    );
+
+  }
+
+  eliminarProducto(
+    id: string
+  ): Observable<any> {
 
     return this.http.delete(
       `${this.apiUrl}/${id}`
@@ -116,174 +93,99 @@ export class InventarioService {
 
   }
 
-  // PUT PRODUCTO
-  actualizarProducto(
-    id: string,
-    producto: Producto
-  ): Observable<any> {
+  existeProducto(id: string): boolean {
 
-    const productoBackend = {
-
-      nombre: producto.nombre,
-      categoria: producto.tipo,
-      precio: producto.precio,
-      stock: producto.cantidad,
-      imagen: producto.imagen || ''
-
-    };
-
-    return this.http.put(
-      `${this.apiUrl}/${id}`,
-      productoBackend
+    return this.carrito.some(
+      item => item.producto.id === id
     );
 
   }
 
-  
- //= CARRITO ==
- 
+  // =========================
+  // CARRITO
+  // =========================
 
-  private guardarCarrito() {
-
-    if (isPlatformBrowser(this.platformId)) {
-
-      localStorage.setItem(
-        'carrito',
-        JSON.stringify(this.carrito)
-      );
-
-    }
-  }
-
-  private cargarCarrito() {
-
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const datos = localStorage.getItem('carrito');
-
-    if (datos) {
-
-      this.carrito = JSON.parse(datos);
-
-    }
-  }
-
-  obtenerCarrito(): CarritoItem[] {
+  obtenerCarrito():
+    CarritoItem[] {
 
     return this.carrito;
 
   }
 
-  agregarAlCarrito(producto: Producto) {
+  agregarAlCarrito(
+    producto: Producto
+  ) {
 
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    if (producto.cantidad <= 0) return;
-
-    const item = this.carrito.find(
-      i => i.producto.id === producto.id
-    );
+    const item =
+      this.carrito.find(
+        i => i.producto.id === producto.id
+      );
 
     if (item) {
 
       item.cantidad++;
-      producto.cantidad--;
 
-    } else {
+    }
+
+    else {
 
       this.carrito.push({
+
         producto,
+
         cantidad: 1
+
       });
 
-      producto.cantidad--;
-
     }
-
-    this.guardarCarrito();
 
   }
 
-  sumarCantidad(item: CarritoItem) {
+  sumarCantidad(
+    item: CarritoItem
+  ) {
 
-    if (!isPlatformBrowser(this.platformId)) return;
+    item.cantidad++;
 
-    if (item.producto.cantidad > 0) {
-
-      item.cantidad++;
-      item.producto.cantidad--;
-
-      this.guardarCarrito();
-
-    }
   }
 
-  restarCantidad(item: CarritoItem) {
-
-    if (!isPlatformBrowser(this.platformId)) return;
+  restarCantidad(
+    item: CarritoItem
+  ) {
 
     if (item.cantidad > 1) {
 
       item.cantidad--;
-      item.producto.cantidad++;
-
-      this.guardarCarrito();
 
     }
-  }
-
-  eliminarProductoDelCarrito(productoId: string) {
-
-    if (!isPlatformBrowser(this.platformId)) return;
-
-    const item = this.carrito.find(
-      i => i.producto.id === productoId
-    );
-
-    if (!item) return;
-
-    item.producto.cantidad += item.cantidad;
-
-    this.carrito = this.carrito.filter(
-      i => i.producto.id !== productoId
-    );
-
-    this.guardarCarrito();
 
   }
 
-  actualizarCarrito(carritoActualizado: CarritoItem[]) {
+  eliminarProductoDelCarrito(
+    productoId: string
+  ) {
 
-    this.carrito = carritoActualizado;
-
-    this.guardarCarrito();
+    this.carrito =
+      this.carrito.filter(
+        item =>
+          item.producto.id !== productoId
+      );
 
   }
 
   obtenerTotal(): number {
 
     return this.carrito.reduce(
+
       (total, item) =>
-        total + item.cantidad * item.producto.precio,
+
+        total +
+        item.cantidad *
+        item.producto.precio,
+
       0
+
     );
-
-  }
-
-  obtenerCantidadTotal(): number {
-
-    return this.carrito.reduce(
-      (total, item) => total + item.cantidad,
-      0
-    );
-
-  }
-
-  vaciarCarrito() {
-
-    this.carrito = [];
-
-    this.guardarCarrito();
 
   }
 

@@ -15,23 +15,22 @@ import {
   templateUrl: './perfil-agricultor.component.html',
   styleUrls: ['./perfil-agricultor.component.css']
 })
+
 export class PerfilAgricultorComponent {
 
   nombre = '';
 
-  cantidad: number | null = null;
+  stock: number | null = null;
 
   precio: number | null = null;
 
-  tipo = '';
+  categoria = '';
 
   mensajeExito = '';
 
   imagen = '';
 
   imagenPreview: string | ArrayBuffer | null = null;
-
-  imagenArchivo: File | null = null;
 
   productos: Producto[] = [];
 
@@ -86,58 +85,53 @@ export class PerfilAgricultorComponent {
 
   }
 
-  soloNumeros(event: Event) {
+  soloNumeros(event: any) {
 
-    const input = event.target as HTMLInputElement;
+    event.target.value =
+      event.target.value.replace(
+        /[^0-9]/g,
+        ''
+      );
 
-    input.value =
-      input.value.replace(/[^0-9]/g, '');
-
-    if (input.value.startsWith('0')) {
-
-      input.value =
-        input.value.replace(/^0+/, '');
-
-    }
-
-    this.cantidad =
-      input.value
-        ? Number(input.value)
+    this.stock =
+      event.target.value
+        ? Number(event.target.value)
         : null;
 
   }
 
-  soloDecimales(event: Event) {
+  soloDecimales(event: any) {
 
-    const input =
-      event.target as HTMLInputElement;
-
-    input.value =
-      input.value.replace(/[^0-9.]/g, '');
+    event.target.value =
+      event.target.value.replace(
+        /[^0-9.]/g,
+        ''
+      );
 
     this.precio =
-      input.value
-        ? Number(input.value)
+      event.target.value
+        ? Number(event.target.value)
         : null;
 
   }
 
-  onFileSelected(event: any): void {
+  onFileSelected(event: any) {
 
-    const file = event.target.files[0];
+    const file =
+      event.target.files[0];
 
     if (file) {
 
-      this.imagenArchivo = file;
-
-      const reader = new FileReader();
+      const reader =
+        new FileReader();
 
       reader.onload = () => {
 
-        this.imagenPreview = reader.result;
-
         this.imagen =
           reader.result as string;
+
+        this.imagenPreview =
+          reader.result;
 
       };
 
@@ -149,130 +143,114 @@ export class PerfilAgricultorComponent {
 
   guardar() {
 
-    if (
-      !this.nombre ||
-      !this.cantidad ||
-      !this.precio ||
-      !this.tipo
-    ) {
+  if (
+    !this.nombre ||
+    !this.stock ||
+    !this.precio ||
+    !this.categoria
+  ) {
 
-      alert('Completa todos los campos');
+    alert('Completa todos los campos');
 
-      return;
-
-    }
-
-    const productoJSON: Producto = {
-
-      nombre: this.nombre,
-
-      cantidad: this.cantidad,
-
-      precio: this.precio,
-
-      tipo: this.tipo,
-
-      imagen: this.imagen
-
-    };
-
-    // ACTUALIZAR
-    if (this.editando) {
-
-      this.inventario
-        .actualizarProducto(
-          this.productoEditandoId,
-          productoJSON
-        )
-        .subscribe({
-
-          next: () => {
-
-            this.mensajeExito =
-              'Producto actualizado correctamente';
-
-            this.cargarProductos();
-
-            this.cancelar();
-
-            setTimeout(() => {
-
-              this.mensajeExito = '';
-
-            }, 3000);
-
-          },
-
-          error: (error) => {
-
-            console.error(error);
-
-            this.mensajeExito =
-              'Error al actualizar';
-
-          }
-
-        });
-
-    }
-
-    // GUARDAR NUEVO
-    else {
-
-      this.inventario
-        .agregarProducto(productoJSON)
-        .subscribe({
-
-          next: () => {
-
-            this.mensajeExito =
-              'Producto agregado correctamente';
-
-            this.cargarProductos();
-
-            this.cancelar();
-
-            setTimeout(() => {
-
-              this.mensajeExito = '';
-
-            }, 3000);
-
-          },
-
-          error: (error) => {
-
-            console.error(error);
-
-            this.mensajeExito =
-              'Error al guardar';
-
-          }
-
-        });
-
-    }
+    return;
 
   }
+
+  const producto: Producto = {
+
+    nombre: this.nombre,
+
+    stock: this.stock,
+
+    precio: this.precio,
+
+    categoria: this.categoria,
+
+    imagen: this.imagen
+
+  };
+
+  if (this.editando) {
+
+    producto.id = this.productoEditandoId;
+
+    this.inventario
+      .actualizarProducto(
+        this.productoEditandoId,
+        producto
+      )
+      .subscribe({
+
+        next: () => {
+
+          this.mensajeExito =
+            'Producto actualizado correctamente';
+
+          this.cargarProductos();
+
+          this.cancelar();
+
+        },
+
+        error: (error) => {
+
+          console.error(error);
+
+        }
+
+      });
+
+  }
+
+  else {
+
+    this.inventario
+      .agregarProducto(producto)
+      .subscribe({
+
+        next: () => {
+
+          this.mensajeExito =
+            'Producto agregado correctamente';
+
+          this.cargarProductos();
+
+          this.cancelar();
+
+        },
+
+        error: (error) => {
+
+          console.error(error);
+
+        }
+
+      });
+
+  }
+
+}
 
   editarProducto(producto: Producto) {
 
     this.editando = true;
 
+    this.mostrar = false;
+
     this.productoEditandoId =
-      producto.id!;
+      producto.id || '';
 
     this.nombre =
       producto.nombre;
 
-    this.cantidad =
-      producto.cantidad;
+    this.stock =
+      producto.stock;
 
     this.precio =
       producto.precio;
 
-    this.tipo =
-      producto.tipo;
+    this.categoria =
+      producto.categoria;
 
     this.imagen =
       producto.imagen || '';
@@ -285,9 +263,7 @@ export class PerfilAgricultorComponent {
   eliminarProducto(id: string) {
 
     const confirmar =
-      confirm(
-        '¿Seguro que deseas eliminar este producto?'
-      );
+      confirm('¿Eliminar producto?');
 
     if (!confirmar) return;
 
@@ -298,26 +274,15 @@ export class PerfilAgricultorComponent {
         next: () => {
 
           this.mensajeExito =
-            'Producto eliminado correctamente';
+            'Producto eliminado';
 
           this.cargarProductos();
-
-          this.cancelar();
-
-          setTimeout(() => {
-
-            this.mensajeExito = '';
-
-          }, 3000);
 
         },
 
         error: (error) => {
 
           console.error(error);
-
-          this.mensajeExito =
-            'Error al eliminar';
 
         }
 
@@ -329,21 +294,26 @@ export class PerfilAgricultorComponent {
 
     this.nombre = '';
 
-    this.cantidad = null;
+    this.stock = null;
 
     this.precio = null;
 
-    this.tipo = '';
+    this.categoria = '';
 
     this.imagen = '';
-
-    this.imagenArchivo = null;
 
     this.imagenPreview = null;
 
     this.editando = false;
 
     this.productoEditandoId = '';
+
+  }
+
+  abrirProductos() {
+
+    this.mostrar =
+      !this.mostrar;
 
   }
 

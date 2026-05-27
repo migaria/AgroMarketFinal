@@ -6,7 +6,7 @@
 
     <div
       class="contenedor-icono-verprod"
-      (click)="mostrar = !mostrar"
+      (click)="abrirProductos()"
     >
 
       <button class="btn-ver-productos">
@@ -28,7 +28,7 @@
 
   <main class="main-content">
 
-
+    <!-- FORMULARIO -->
 
     <section
       class="form-section"
@@ -53,18 +53,16 @@
           </button>
 
           <h2>
-
             {{
               editando
               ? 'EDITANDO PRODUCTO'
               : 'AGRICULTOR'
             }}
-
           </h2>
 
         </div>
 
-     
+        <!-- NOMBRE -->
 
         <div class="form-group">
 
@@ -84,7 +82,7 @@
 
         </div>
 
-   
+        <!-- STOCK -->
 
         <div class="form-group">
 
@@ -98,13 +96,13 @@
             maxlength="5"
             required
             (input)="soloNumeros($event)"
-            [(ngModel)]="cantidad"
+            [(ngModel)]="stock"
             name="cantidad"
           />
 
         </div>
 
-   
+        <!-- PRECIO -->
 
         <div class="form-group">
 
@@ -124,17 +122,17 @@
 
         </div>
 
-        
+        <!-- CATEGORIA -->
 
         <div class="form-group">
 
           <label for="tipo">
-            Tipo
+            Categoría
           </label>
 
           <select
             id="tipo"
-            [(ngModel)]="tipo"
+            [(ngModel)]="categoria"
             name="tipo"
           >
 
@@ -166,6 +164,7 @@
 
         </div>
 
+        <!-- IMAGEN -->
 
         <div class="form-group">
 
@@ -182,7 +181,7 @@
 
         </div>
 
-       
+        <!-- PREVIEW -->
 
         <div
           class="preview"
@@ -197,7 +196,7 @@
 
         </div>
 
-       
+        <!-- BOTONES -->
 
         <div class="botones">
 
@@ -227,6 +226,7 @@
 
         </div>
 
+        <!-- MENSAJE -->
 
         <p
           class="mensaje-exito"
@@ -241,6 +241,7 @@
 
     </section>
 
+    <!-- PANEL PRODUCTOS -->
 
     <section
       class="productos-derecha"
@@ -279,7 +280,7 @@
 
           <p>
             <strong>Cantidad:</strong>
-            {{ p.cantidad }} Kg
+            {{ p.stock }} Kg
           </p>
 
           <p>
@@ -288,8 +289,8 @@
           </p>
 
           <p>
-            <strong>Tipo:</strong>
-            {{ p.tipo }}
+            <strong>Categoría:</strong>
+            {{ p.categoria }}
           </p>
 
           <div class="acciones-producto">
@@ -305,7 +306,7 @@
 
             <button
               class="btn-eliminar"
-              (click)="eliminarProducto(p.id!)"
+              (click)="eliminarProducto(p.id || '')"
             >
 
               Eliminar
@@ -320,11 +321,11 @@
 
     </section>
 
-   
+    <!-- IMAGEN DERECHA -->
 
     <section
       class="imagen-section"
-      *ngIf="!mostrar && !editando"
+      *ngIf="!mostrar"
     >
 
       <div class="imagen-container">

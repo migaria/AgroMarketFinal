@@ -2,29 +2,36 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { UsuarioService } from '../services/usuario.service';
 
 @Component({
   selector: 'app-registrar',
   standalone: true,
-  imports: [FormsModule, CommonModule], 
+  imports: [FormsModule, CommonModule],
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.css']
 })
 export class RegistrarComponent {
+
   usuario = {
     nombre: '',
     correo: '',
     telefono: '',
     password: '',
-    confirmar: ''
+    confirmar: '',
+    rol: ''
   };
-  
-  mensajeExito = ''; 
 
-  constructor(private router: Router) {}
+  mensajeExito = '';
+
+  constructor(
+    private router: Router,
+    private usuarioService: UsuarioService
+  ) {}
+
   regresar() {
-  this.router.navigate(['/login']);
-}
+    this.router.navigate(['/login']);
+  }
 
   validarNombre(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -39,42 +46,38 @@ export class RegistrarComponent {
   }
 
   registrar() {
-    const { nombre, correo, telefono, password, confirmar } = this.usuario;
-    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-     if (nombre && correo && telefono && password && confirmar) {
-      if (password !== confirmar) {
-        alert(' password no coinciden.');
-        return;
-      }
-    if (!regexPassword.test(password)) {
-      alert('⚠️ La contraseña debe tener al menos 8 caracteres e incluir letras y números.');
-      return;
-    }
-      const usuarioData = { nombre, correo, telefono, password };
-      localStorage.setItem('usuarioRegistrado', JSON.stringify(usuarioData));
+    const usuarioData = {
+      nombre: this.usuario.nombre,
+      correo: this.usuario.correo,
+      telefono: this.usuario.telefono,
+      password: this.usuario.password,
+      confirmarPassword: this.usuario.confirmar,
+      rol: this.usuario.rol
+    };
 
-      this.mensajeExito = ' Registro exitoso. Redirigiendo al login...';
-      console.log('Usuario registrado:', { nombre, correo, telefono
-        
+    this.usuarioService.registrar(usuarioData)
+      .subscribe({
+        next: (respuesta) => {
+          alert(respuesta);
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          alert('Error al registrar');
+        }
       });
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 2000);
-      } else {
-      alert('Por favor, completa todos los campos.');
-    }
-    
   }
-  cancelar() {
-    this.usuario ={
-    nombre: '',
-    correo: '',
-    telefono: '',
-    password: '',
-    confirmar: ''
-  };
-  this.mensajeExito='';
-}
-}
 
+  cancelar() {
+    this.usuario = {
+      nombre: '',
+      correo: '',
+      telefono: '',
+      password: '',
+      confirmar: '',
+      rol: ''
+    };
+
+    this.mensajeExito = '';
+  }
+}
