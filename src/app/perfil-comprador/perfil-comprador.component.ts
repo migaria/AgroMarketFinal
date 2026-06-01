@@ -1,13 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-
-import {
-  InventarioService,
-  Producto,
-  CarritoItem
-} from '../services/inventario.service';
+import { InventarioService, Producto, CarritoItem } from '../services/inventario.service';
 
 @Component({
   selector: 'app-perfil-comprador',
@@ -16,15 +11,11 @@ import {
   templateUrl: './perfil-comprador.component.html',
   styleUrls: ['./perfil-comprador.component.css']
 })
-
-export class PerfilCompradorComponent {
+export class PerfilCompradorComponent implements OnInit {
 
   productos: Producto[] = [];
-
   carrito: CarritoItem[] = [];
-
   panelAbierto = false;
-
   totalItems = 0;
 
   constructor(
@@ -33,176 +24,66 @@ export class PerfilCompradorComponent {
     private location: Location
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.inventario.getProductos().subscribe({
+      next: (data: Producto[]) => {
+        this.productos = data;
+      },
+      error: (err: any) => {
+        console.error('Error cargando productos:', err);
+      }
+    });
 
-    // =========================
-    // CARGAR PRODUCTOS BACKEND
-    // =========================
-
-    this.inventario
-      .getProductos()
-      .subscribe({
-
-        next: (data: Producto[]) => {
-
-          this.productos = data;
-
-        },
-
-        error: (error: any) => {
-
-          console.error(
-            'Error cargando productos:',
-            error
-          );
-
-        }
-
-      });
-
-    // =========================
-    // CARRITO
-    // =========================
-
-    this.carrito =
-      this.inventario.obtenerCarrito();
-
+    this.carrito = this.inventario.obtenerCarrito();
     this.actualizarContador();
-
   }
 
-  // =========================
-  // PANEL CARRITO
-  // =========================
-
-  togglePanel() {
-
-    this.panelAbierto =
-      !this.panelAbierto;
-
+  togglePanel(): void {
+    this.panelAbierto = !this.panelAbierto;
   }
-
-  // =========================
-  // CONTADOR
-  // =========================
 
   obtenerTotalItems(): number {
-
-    return this.carrito.reduce(
-
-      (acc, item) =>
-
-        acc + item.cantidad,
-
-      0
-
-    );
-
+    return this.carrito.reduce((acc, item) => acc + item.cantidad, 0);
   }
 
-  actualizarContador() {
-
-    this.totalItems =
-      this.obtenerTotalItems();
-
+  actualizarContador(): void {
+    this.totalItems = this.obtenerTotalItems();
   }
 
-  // =========================
-  // AGREGAR CARRITO
-  // =========================
-
-  agregarAlCarrito(
-    producto: Producto
-  ) {
-
-    this.inventario
-      .agregarAlCarrito(producto);
-
-    this.carrito =
-      this.inventario.obtenerCarrito();
-
+  agregarAlCarrito(producto: Producto): void {
+    if (producto.stock <= 0) {
+      alert('No hay stock disponible');
+      return;
+    }
+    this.inventario.agregarAlCarrito(producto);
+    this.carrito = this.inventario.obtenerCarrito();
     this.actualizarContador();
-
   }
 
-  // =========================
-  // SUMAR
-  // =========================
-
-  sumar(item: CarritoItem) {
-
-    this.inventario
-      .sumarCantidad(item);
-
-    this.carrito =
-      this.inventario.obtenerCarrito();
-
+  sumar(item: CarritoItem): void {
+    this.inventario.sumarCantidad(item);
+    this.carrito = this.inventario.obtenerCarrito();
     this.actualizarContador();
-
   }
 
-  // =========================
-  // RESTAR
-  // =========================
-
-  restar(item: CarritoItem) {
-
-    this.inventario
-      .restarCantidad(item);
-
-    this.carrito =
-      this.inventario.obtenerCarrito();
-
+  restar(item: CarritoItem): void {
+    this.inventario.restarCantidad(item);
+    this.carrito = this.inventario.obtenerCarrito();
     this.actualizarContador();
-
   }
 
-  // =========================
-  // ELIMINAR
-  // =========================
-
-  eliminar(item: CarritoItem) {
-
-    this.inventario
-      .eliminarProductoDelCarrito(
-        item.producto.id || ''
-      );
-
-    this.carrito =
-      this.inventario.obtenerCarrito();
-
+  eliminar(item: CarritoItem): void {
+    this.inventario.eliminarProductoDelCarrito(item.producto.id || '');
+    this.carrito = this.inventario.obtenerCarrito();
     this.actualizarContador();
-
   }
-
-  // =========================
-  // TOTAL
-  // =========================
 
   obtenerTotal(): number {
-
-    return this.carrito.reduce(
-
-      (total, item) =>
-
-        total +
-        item.cantidad *
-        item.producto.precio,
-
-      0
-
-    );
-
+    return this.carrito.reduce((total, item) =>
+      total + item.cantidad * item.producto.precio, 0);
   }
 
-  // =========================
-  // REGRESAR
-  // =========================
-
-  regresar() {
-
+  regresar(): void {
     this.location.back();
-
   }
-
 }

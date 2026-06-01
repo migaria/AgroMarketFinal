@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InventarioService, CarritoItem } from '../services/inventario.service';
 import { Location } from '@angular/common';
+import { InventarioService, CarritoItem } from '../services/inventario.service';
 
 @Component({
   selector: 'app-carrito-compras',
@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   templateUrl: './carrito-compras.component.html',
   styleUrls: ['./carrito-compras.component.css']
 })
-export class CarritoComprasComponent {
+export class CarritoComprasComponent implements OnInit {
 
   carrito: CarritoItem[] = [];
   total = 0;
@@ -20,30 +20,34 @@ export class CarritoComprasComponent {
     private location: Location
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.carrito = this.inventario.obtenerCarrito();
-    this.carrito = this.carrito.filter(item =>
-   this.inventario.existeProducto(item.producto.id || '')
-    );
-
     this.actualizarTotal();
   }
 
-  sumar(item: CarritoItem) {
+  sumar(item: CarritoItem): void {
     this.inventario.sumarCantidad(item);
+    this.carrito = this.inventario.obtenerCarrito();
     this.actualizarTotal();
   }
 
-  restar(item: CarritoItem) {
+  restar(item: CarritoItem): void {
     this.inventario.restarCantidad(item);
+    this.carrito = this.inventario.obtenerCarrito();
     this.actualizarTotal();
   }
 
-  actualizarTotal() {
+  eliminar(item: CarritoItem): void {
+    this.inventario.eliminarProductoDelCarrito(item.producto.id || '');
+    this.carrito = this.inventario.obtenerCarrito();
+    this.actualizarTotal();
+  }
+
+  actualizarTotal(): void {
     this.total = this.inventario.obtenerTotal();
   }
 
-  regresar() {
+  regresar(): void {
     this.location.back();
   }
 }
